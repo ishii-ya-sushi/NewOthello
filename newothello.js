@@ -12,10 +12,26 @@ for (let i = 0; i < 100; i++) {
 }
 
 
+
+
 // ---PART.1  グローバルスコープの定数・配列・関数置き場-------------
 
-// ---PART.1.1  マス<div class="square">が 100個 入ったブラウザ表示用『arraySquare』配列風を作る
-const arraySquare = document.querySelectorAll(".square");
+// ---PART.1.1.1  マス<div class="square">が 100個 入ったブラウザ表示用『arraySquare』配列風を作る（１次元配列） 
+// const arraySquare = document.querySelectorAll(".square");
+
+
+// ---PART.1.1.2  100個(10×10)が入った ２次元配列 を作ってみる 
+const arraySquare2D = [];
+for (let i = 0; i < 10; i++) {
+    const arrayRow = [];
+    for (let k = 0; k < 10; k++) {
+        const newDivs = document.createElement("div");
+        arrayRow.push(newDivs);
+    }
+    console.log(arrayRow)
+    arraySquare2D.push(arrayRow);
+}
+console.log(arraySquare2D)
 
 
 // ---PART.1.2.1  記録用の配列『arrayRecord』を作る。（１次元配列）  
@@ -126,7 +142,7 @@ for (let i = 0; i < (arrayInner.length); i++) {
 
 // ---PART.4  記録用の配列『arrayRecord』にゲーム開始時のスコア（配置）を入力する-------------
 //    スコアは、黒は"b"、白は"w"、空白は"0" とする
-//    真ん中に黒と白。黒は"b"、白は"w"、空白は"0"とする
+//    真ん中に黒と白。黒は"b"、白は"w"
 //    勝敗の判定のため class="inner" は削除する
 
 arrayRecord[4][4] = "w";
@@ -146,7 +162,8 @@ arraySquare[54].classList.add("black");
 arraySquare[55].classList.add("white");
 
 
-
+console.log(arraySquare);
+console.log(arrayRecord);
 console.table(arraySquare);
 console.table(arrayRecord);
 
