@@ -149,20 +149,20 @@ for (let i = 0; i < (arrayInner.length); i++) {
 //    真ん中に黒と白。黒は"b"、白は"w"
 //    勝敗の判定のため class="inner" は削除する
 
-// arrayRecord2D[4][4] = "w";
-// arrayRecord2D[4][5] = "b";
-// arrayRecord2D[5][4] = "b";
-// arrayRecord2D[5][5] = "w";
+arrayRecord2D[4][4] = "w";
+arrayRecord2D[4][5] = "b";
+arrayRecord2D[5][4] = "b";
+arrayRecord2D[5][5] = "w";
 
-// arraySquare2D[4][4].classList.remove("inner");
-// arraySquare2D[4][5].classList.remove("inner");
-// arraySquare2D[5][4].classList.remove("inner");
-// arraySquare2D[5][5].classList.remove("inner");
+arraySquare2D[4][4].classList.remove("inner");
+arraySquare2D[4][5].classList.remove("inner");
+arraySquare2D[5][4].classList.remove("inner");
+arraySquare2D[5][5].classList.remove("inner");
 
-// arraySquare2D[4][4].classList.add("white");
-// arraySquare2D[4][5].classList.add("black");
-// arraySquare2D[5][4].classList.add("black");
-// arraySquare2D[5][5].classList.add("white");
+arraySquare2D[4][4].classList.add("white");
+arraySquare2D[4][5].classList.add("black");
+arraySquare2D[5][4].classList.add("black");
+arraySquare2D[5][5].classList.add("white");
 
 
 arrayRecord2D[2][4] = "w";
@@ -226,38 +226,33 @@ function ableCheckBlack() {
             // まず前回付与したclass="able"を削除する
             // arrayRecord2D[i][k].classList.remove("able");
 
-            //         // 引数  (i, k, count, direction, sign, ownColor, opponentColor)
-            //         // count は再起を何回繰り返したか
-
 
             //         // 引数  (i, k, vertical, horizontal, ownColor, opponentColor)
             //         // i と k は どの要素をクリックしたか
-
-            //         // minus1, zero0, plus1, はそのままの意味
-
-            //         // ownColor は自軍を, opponentColor 敵軍を表す。"b"は黒, "w"は白
+            //         // vertical は行（i） の移動   horizontal は列（k） の移動   
+            //         // ownColor は自軍を, opponent は敵軍を表す。"b"は黒, "w"は白
 
 
-            //         // （水平方向のチェック）
+            // （水平方向のチェック）
             checkLine(i, k, 0, +1, "b", "w"); // 右方向へ
-            // checkLine(i, k, 0, -1, "b", "w"); // 左方向
-            //         // （垂直方向のチェック）
-            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 下方向
-            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 上方向
-            //         // （斜め方向のチェック）
-            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 右下方向
-            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 左上方向
-            //         // （斜め方向のチェック）
-            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 左下方向
-            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 右上方向
-            //     }
-
-            //     outer();
-            //     document.querySelector("#noticeBlack1").style.border = "15px dashed black"
-            //     document.querySelector("#noticeBlack4").style.border = "0px dashed black"
+            checkLine(i, k, 0, -1, "b", "w"); // 左方向
+            // （垂直方向のチェック）
+            checkLine(i, k, +1, 0, "b", "w"); // 下方向
+            // checkLine(i, k, -1, 0, "b", "w"); // 上方向
+            // // （斜め方向のチェック）
+            // checkLine(i, k, +1, +1, "b", "w"); // 右下方向
+            // checkLine(i, k, -1, -1, "b", "w"); // 左上方向
+            // // （斜め方向のチェック）
+            // checkLine(i, k, +1, -1, "b", "w"); // 左下方向
+            // checkLine(i, k, -1, +1, "b", "w"); // 右上方向
         }
+
+        //     outer();
+        //     document.querySelector("#noticeBlack1").style.border = "15px dashed black"
+        //     document.querySelector("#noticeBlack4").style.border = "0px dashed black"
     }
 }
+
 
 // // ---PART.7-1-2 白石が置けるか置けないか
 
@@ -293,7 +288,7 @@ function ableCheckBlack() {
 // checkLine(i, k, 0, -1, "b", "w"); // 左方向
 
 
-    let count = 1;
+let count = 1;
 function checkLine(i, k, vertical, horizontal, own, opponent) {
 
     console.log("記録用配列" + arrayRecord2D);
@@ -323,7 +318,7 @@ function checkLine(i, k, vertical, horizontal, own, opponent) {
             count = count + 1;
             console.log("countは" + count);
 
-            console.log(i+""+k+""+vertical+""+horizontal+""+own+""+opponent);
+            console.log(i + "" + k + "" + vertical + "" + horizontal + "" + own + "" + opponent);
             checkLine(i, k, vertical, horizontal, own, opponent);
         } else {
             console.log("最後まで来た");
@@ -335,7 +330,7 @@ function checkLine(i, k, vertical, horizontal, own, opponent) {
                 // クリック出来るようにするために。("inner")と("darkgreen")クラスを削除し。
                 // クリック出来るように("able")クラスを付与する（ついでに背景色も変える）
                 arraySquare2D[i][k].classList.add("able");
-            } else{
+            } else {
                 console.log("bagu???");
             }
         }
