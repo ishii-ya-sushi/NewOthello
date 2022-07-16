@@ -120,7 +120,7 @@ function outerSide() {
 
 // ---PART.2.2  番兵さんにclass="outer" 属性を付与する。。
 
-// outer();
+outer();
 function outer() {
     for (let i = 0; i < 4; i++) {
         for (let k = 0; k < 9; k++) {
@@ -138,10 +138,10 @@ console.log("arrayOuter2Dは" + arrayOuter2D);
 // ---arraySquare配列から番兵さんを除いた『(".square:not(.outer)")』、
 // ６４（8×8）個のマスでarrayInner配列を作る。// class="inner" を付与する。
 
-const arrayInner = document.querySelectorAll(".square:not(.outer)");
-for (let i = 0; i < (arrayInner.length); i++) {
-    arrayInner[i].classList.add("inner");
-}
+// const arrayInner = document.querySelectorAll(".square:not(.outer)");
+// for (let i = 0; i < (arrayInner.length); i++) {
+//     arrayInner[i].classList.add("inner");
+// }
 
 
 // ---PART.4  記録用の配列『arrayRecord』にゲーム開始時のスコア（配置）を入力する-------------
@@ -154,50 +154,23 @@ arrayRecord2D[4][5] = "b";
 arrayRecord2D[5][4] = "b";
 arrayRecord2D[5][5] = "w";
 
-// arraySquare2D[4][4].classList.remove("inner");
-// arraySquare2D[4][5].classList.remove("inner");
-// arraySquare2D[5][4].classList.remove("inner");
-// arraySquare2D[5][5].classList.remove("inner");
+arraySquare2D[4][4].classList.remove("inner");
+arraySquare2D[4][5].classList.remove("inner");
+arraySquare2D[5][4].classList.remove("inner");
+arraySquare2D[5][5].classList.remove("inner");
 
-// arraySquare2D[4][4].classList.add("white");
-// arraySquare2D[4][5].classList.add("black");
-// arraySquare2D[5][4].classList.add("black");
-// arraySquare2D[5][5].classList.add("white");
-
-
-
-
-arrayRecord2D[1][3] = "b";
-arrayRecord2D[1][4] = "b";
-arrayRecord2D[1][5] = "b";
-arrayRecord2D[2][4] = "w";
-arrayRecord2D[2][5] = "w";
-arrayRecord2D[2][6] = "w";
-
-
-arrayRecord2D[7][3] = "b";
-arrayRecord2D[7][4] = "b";
-arrayRecord2D[7][5] = "b";
-arrayRecord2D[6][4] = "w";
-arrayRecord2D[6][5] = "w";
-arrayRecord2D[6][6] = "w";
 
 
 // // ---PART.5  全てのはじまり
 
-console.log("arrayRecord2Dは" + arrayRecord2D);
-
 window.onload = function () {
 
-    // outer();   // PART.PART.2.2  番兵さんに。
-    drawing(); // PART.6
-    ableCheckBlack(); // PART.7-1-1
-    // ableCheckWhite(); // PART.7-1-2
+    drawing();    // PART.6
 
-    //     //     putStone();       // PART.8
+    ableCheck("b", "w"); // PART.7-2   先手の黒石が置ける場所を探す
+
+    putStone();       // PART.8
 }
-
-
 
 
 // // ---PART.6---記録用の配列『arrayRecord』のスコアに合わせてブラウザ上の盤面を表示する----------
@@ -205,8 +178,10 @@ window.onload = function () {
 function drawing() {
     for (let i = 0; i < 10; i++) {
         for (let k = 0; k < 10; k++) {
+            arraySquare2D[i][k].classList.remove("able");
             arraySquare2D[i][k].classList.remove("black");
             arraySquare2D[i][k].classList.remove("white");
+
 
             if (arrayRecord2D[i][k] == "b") {
                 arraySquare2D[i][k].classList.add("black");
@@ -222,14 +197,11 @@ function drawing() {
 
 // // ---PART.７---ルール上、石が置けるか置けないかを確認する----------
 
-// // ---PART.7-1-1 黒石が置けるか置けないかを判定する
-function ableCheckBlack() {
+// // ---PART.7-2 黒石（"b", "w"）、白石（"w", "b"）が置けるか置けないかを判定する
+function ableCheck(own, opponent,) {
 
     for (let i = 0; i < 10; i++) {
         for (let k = 0; k < 10; k++) {
-            // まず前回付与したclass="able"を削除する
-            // arrayRecord2D[i][k].classList.remove("able");
-
 
             //         // 引数  (i, k, vertical, horizontal, own, opponent, count)
             //         // i と k は どの要素をクリックしたか
@@ -238,56 +210,24 @@ function ableCheckBlack() {
             //         // count は『再起』の回数をカウントする
 
             // （水平方向のチェック）
-            checkLine(i, k, 0, +1, "b", "w", 1); // 右方向へ
-            checkLine(i, k, 0, -1, "b", "w", 1); // 左方向
+            checkLine(i, k, 0, +1, own, opponent, 1); // 右方向へ
+            checkLine(i, k, 0, -1, own, opponent, 1); // 左方向
             // （垂直方向のチェック）
-            checkLine(i, k, +1, 0, "b", "w", 1); // 下方向
-            checkLine(i, k, -1, 0, "b", "w", 1); // 上方向
+            checkLine(i, k, +1, 0, own, opponent, 1); // 下方向
+            checkLine(i, k, -1, 0, own, opponent, 1); // 上方向
             // // （斜め方向のチェック）
-            checkLine(i, k, +1, +1, "b", "w", 1); // 右下方向
-            checkLine(i, k, -1, -1, "b", "w", 1); // 左上方向
+            checkLine(i, k, +1, +1, own, opponent, 1); // 右下方向
+            checkLine(i, k, -1, -1, own, opponent, 1); // 左上方向
             // // （斜め方向のチェック）
-            checkLine(i, k, +1, -1, "b", "w", 1); // 左下方向
-            checkLine(i, k, -1, +1, "b", "w", 1); // 右上方向
-        }
-
-        //     outer();
-        //     document.querySelector("#noticeBlack1").style.border = "15px dashed black"
-        //     document.querySelector("#noticeBlack4").style.border = "0px dashed black"
-    }
-}
-
-
-// // ---PART.7-1-2 白石が置けるか置けないか
-
-function ableCheckWhite() {
-    for (let i = 0; i < 10; i++) {
-        for (let k = 0; k < 10; k++) {
-
-            //         arraySquare[i].classList.remove("able");
-
-
-            checkLine(i, k, 0, +1, "w", "b", 1); // 右方向へ
-            checkLine(i, k, 0, -1, "w", "b", 1); // 左方向
-
-            checkLine(i, k, +1, 0, "w", "b", 1); // 下方向
-            checkLine(i, k, -1, 0, "w", "b", 1); // 上方向
-
-            checkLine(i, k, +1, +1, "w", "b", 1); // 右下方向
-            checkLine(i, k, -1, -1, "w", "b", 1); // 左上方向
-
-            checkLine(i, k, +1, -1, "w", "b", 1); // 左下方向
-            checkLine(i, k, -1, +1, "w", "b", 1); // 右上方向
-            //     }
-            //     outer();
-            //     document.querySelector("#noticeBlack1").style.border = "0px dashed white"
-            //     document.querySelector("#noticeBlack4").style.border = "15px dashed white"
+            checkLine(i, k, +1, -1, own, opponent, 1); // 左下方向
+            checkLine(i, k, -1, +1, own, opponent, 1); // 右上方向
         }
     }
 }
 
 
-// // ---PART.7-2
+
+// // ---PART.7-3
 // // 各方向（8方向をチェックする）
 
 // 引数  (i, k, vertical, horizontal, own, opponent, count)
@@ -295,38 +235,31 @@ function ableCheckWhite() {
 
 function checkLine(i, k, vertical, horizontal, own, opponent, count) {
 
-    console.log("記録用配列" + arrayRecord2D);
-    console.log("checkLine関数に来た回数" + (10 * i + k));
     console.log("チェックするindexは" + (10 * i + k));
-    console.log("記録用の配列は" + arrayRecord2D);
-    console.log("カウントは" + count)
 
-
-
-    // console.log(element.classList.contains("myclass1"));
 
     if (arrayRecord2D[i][k] != 0 || arraySquare2D[i][k].classList.contains("outer")) {
 
-        console.log("indexは" + (i) + (k) + "です。0でない。既に石が置かれているか、または番兵さんか");
+        // console.log("indexは" + (i) + (k) + "です。0でない。既に石が置かれているか、または番兵さんか");
         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
 
     } else if (arrayRecord2D[i + vertical][k + horizontal] != opponent) {
         // console.log("隣は敵色でない");
         // // 敵軍以外、つまり
-        console.log("indexは" + (i) + (k) + "です。記録は0だ!でも残念");
-        console.log("隣接はのindexは" + (i + vertical) + (k + horizontal) + "石が置かれていないか、あるいは、自軍の石が置かれている");
+        // console.log("indexは" + (i) + (k) + "です。記録は0だ!でも残念");
+        // console.log("隣接はのindexは" + (i + vertical) + (k + horizontal) + "石が置かれていないか、あるいは、自軍の石が置かれている");
         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
 
     } else {
         // checkLine(i, k, -1, +1, "w", "b"); // 右上方向
-        console.log(i + "と" + k + "と" + vertical + "と" + horizontal + "と" + own + "と" + opponent + "と" + count);
-        console.log("隣接はのindexは" + (i + (vertical * count)) + (k + (horizontal * count)) + "石は、 敵軍の石が置かれている");
+        // console.log(i + "と" + k + "と" + vertical + "と" + horizontal + "と" + own + "と" + opponent + "と" + count);
+        // console.log("隣接はのindexは" + (i + (vertical * count)) + (k + (horizontal * count)) + "石は、 敵軍の石が置かれている");
 
-        console.log(count)
-        console.log((vertical * count))
-        console.log((horizontal * count))
-        console.log((i + (vertical * count)))
-        console.log((k + (horizontal * count)))
+        // console.log(count)
+        // console.log((vertical * count))
+        // console.log((horizontal * count))
+        // console.log((i + (vertical * count)))
+        // console.log((k + (horizontal * count)))
 
         if (arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] == opponent) {
             // 隣は敵軍の石である前提だけれども、１つ隣から検索していく
@@ -350,7 +283,7 @@ function checkLine(i, k, vertical, horizontal, own, opponent, count) {
                 // クリック出来るように("able")クラスを付与する（ついでに背景色も変える）
                 arraySquare2D[i][k].classList.add("able");
             } else {
-                console.log("bagu???");
+                console.log("最後は石がなかったか番兵さん　　　bagu???");
             }
         }
         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
@@ -363,7 +296,7 @@ function checkLine(i, k, vertical, horizontal, own, opponent, count) {
 // // ---PART.8---石を置く（クリックする）----------
 // // クリックすると〇が黒色⇔白色と交互にでる。ルール上石を置けない所はクリックできない。
 // // 同じ場所には２度クリックできない。
-putStone()
+// putStone();
 function putStone() {
     let count = 0;
     const passCount = 0;
@@ -373,28 +306,24 @@ function putStone() {
             arraySquare2D[i][k].addEventListener('click', function () {
 
                 console.log("クリックされました")
-                // arraySquare2D[i][k].addEventListener('click', function () {
                 // お知らせを消す
                 // document.querySelector("#noticeBlack2").textContent = "";
                 // document.querySelector("#noticeBlack3").textContent = "";
 
                 if (count % 2 === 0) {
-                    // console.log("黒でクリックしたのはindexの" + i);
-                    // console.log("黒でクリックしたときの配列は" + arrayRecord);
 
                     // class="able" を削除  class="black" を付与
                     // arraySquare[i].classList.remove("able");
                     // arraySquare[i].classList.add("black");
 
-                    // 記録用配列上で、挟んだ白石（w）を黒色（b）に書き換える
-                    console.log("クリックされました")
-                    flipStoneBlack(i, k);
+                    // --- 黒石（"b", "w"）にひっくり返す
+                    checkFlip(i, k, "b", "w");
 
                     // ブラウザ上の表示を書き換える（記録用配列に沿って）
                     drawing();
 
                     // 後手（白軍）が置くことが可能なマスを調べる
-                    // ableCheckWhite();
+                    ableCheck("w", "b");
 
                     // もし後手（白軍）の置くところがなければパスする
                     // カウントを『+1』する
@@ -404,21 +333,42 @@ function putStone() {
                     count = count + passCount;
                     // console.log("カウントは" + count + "になった");
 
+
+
+
+                    document.querySelector("#noticeBlack1").style.border = "0px dashed white"
+                    document.querySelector("#noticeBlack4").style.border = "15px dashed white"
+
                     // 勝敗を判定する
                     // checkWin()
 
+
+
                 } else {
-                    arraySquare[i].classList.remove("able");
-                    arraySquare[i].classList.add("white");
+                    // arraySquare[i].classList.remove("able");
+                    // arraySquare[i].classList.add("white");
 
-                    //
-                    flipStoneWhite(i)
+                    // --- 白石（"w", "b"）にひっくり返す
+
+                    checkFlip(i, k, "w", "b");
+
+
                     drawing();
-                    ableCheckBlack();
-                    const passCount = checkPass(count);
-                    count = count + passCount;
 
-                    checkWin()
+                    // 先手（黒石）が置くことが可能なマスを調べる
+                    ableCheck("b", "w");
+
+
+
+                    // const passCount = checkPass(count);
+                    // count = count + passCount;
+
+
+
+                    document.querySelector("#noticeBlack1").style.border = "15px dashed black"
+                    document.querySelector("#noticeBlack4").style.border = "0px dashed black"
+
+                    // checkWin()
                 }
 
                 count = count + 1;
@@ -434,28 +384,28 @@ function putStone() {
 // ---PART.9---挟まれた石をひっくり返す----------
 // ---PART.9.1.1 黒石で挟んで白石をひっくり返す
 
-function flipStoneBlack(i, k) {
-    // どの方向の白石が黒色挟まれてひっくり返せるか確認する
-    // 引数  (i, k, vertical, horizontal, own, opponent, count)
-    // （水平方向のチェック）
-    flipStone(i, k, 0, +1, "b", "w", 1); // 右方向へ
-    flipStone(i, k, 0, -1, "b", "w", 1); // 左方向
-    // （垂直方向のチェック）
-    flipStone(i, k, +1, 0, "b", "w", 1); // 下方向
-    flipStone(i, k, -1, 0, "b", "w", 1); // 上方向
-    // // （斜め方向のチェック）
-    flipStone(i, k, +1, +1, "b", "w", 1); // 右下方向
-    flipStone(i, k, -1, -1, "b", "w", 1); // 左上方向
-    // // （斜め方向のチェック）
-    flipStone(i, k, +1, -1, "b", "w", 1); // 左下方向
-    flipStone(i, k, -1, +1, "b", "w", 1); // 右上方向
+// function flipStoneBlack(i, k) {
+//     // どの方向の白石が黒色挟まれてひっくり返せるか確認する
+//     // 引数  (i, k, vertical, horizontal, own, opponent, count)
+//     // （水平方向のチェック）
+//     flipStone(i, k, 0, +1, "b", "w", 1); // 右方向へ
+//     flipStone(i, k, 0, -1, "b", "w", 1); // 左方向
+//     // （垂直方向のチェック）
+//     flipStone(i, k, +1, 0, "b", "w", 1); // 下方向
+//     flipStone(i, k, -1, 0, "b", "w", 1); // 上方向
+//     // // （斜め方向のチェック）
+//     flipStone(i, k, +1, +1, "b", "w", 1); // 右下方向
+//     flipStone(i, k, -1, -1, "b", "w", 1); // 左上方向
+//     // // （斜め方向のチェック）
+//     flipStone(i, k, +1, -1, "b", "w", 1); // 左下方向
+//     flipStone(i, k, -1, +1, "b", "w", 1); // 右上方向
 
-    // // 記録用配列に、"自軍の色を" を記入する
-    // arrayRecord[i] = "b";
-    // // 表示用配列から、class=""inner"を削除する
-    // arraySquare[i].classList.remove("inner");
+//     // // 記録用配列に、"自軍の色を" を記入する
+//     // arrayRecord[i] = "b";
+//     // // 表示用配列から、class=""inner"を削除する
+//     // arraySquare[i].classList.remove("inner");
 
-}
+// }
 
 
 // // ---PART.9.1.2 白石で挟んでに黒石をひっくり返す
@@ -474,9 +424,39 @@ function flipStoneBlack(i, k) {
 // }
 
 
+
+
+// // ---PART.9-2 黒石（"b", "w"）に、白石（"w", "b"）にひっくり返す
+
+function checkFlip(i, k, own, opponent) {
+    // どの方向の白石が黒色挟まれてひっくり返せるか確認する
+    // 引数  (i, k, vertical, horizontal, own, opponent, count)
+    // （水平方向のチェック）
+    flipStone(i, k, 0, +1, own, opponent, 1); // 右方向へ
+    flipStone(i, k, 0, -1, own, opponent, 1); // 左方向
+    // （垂直方向のチェック）
+    flipStone(i, k, +1, 0, own, opponent, 1); // 下方向
+    flipStone(i, k, -1, 0, own, opponent, 1); // 上方向
+    // // （斜め方向のチェック）
+    flipStone(i, k, +1, +1, own, opponent, 1); // 右下方向
+    flipStone(i, k, -1, -1, own, opponent, 1); // 左上方向
+    // // （斜め方向のチェック）
+    flipStone(i, k, +1, -1, own, opponent, 1); // 左下方向
+    flipStone(i, k, -1, +1, own, opponent, 1); // 右上方向
+
+    // // 記録用配列に、"自軍の色を" を記入する
+    arrayRecord2D[i][k] = own;
+    // // 表示用配列から、class=""inner"を削除する
+    // arraySquare[i].classList.remove("inner");
+
+}
+
+
+
+
 // // ---PART.9.2
 // // 各方向（8方向をチェックし、ひっくり返す）
-flipStone()
+// flipStone()
 function flipStone(i, k, vertical, horizontal, own, opponent, count) {
 
     // console.log("記録用配列" + arrayRecord2D);
@@ -504,7 +484,7 @@ function flipStone(i, k, vertical, horizontal, own, opponent, count) {
     } else {
         // checkLine(i, k, -1, +1, "w", "b"); // 右上方向
         console.log(i + "と" + k + "と" + vertical + "と" + horizontal + "と" + own + "と" + opponent + "と" + count);
-        console.log("隣接はのindexは" + (i + (vertical * count)) + (k + (horizontal * count)) + "石は、 敵軍の石が置かれている");
+        console.log(count + "個。隣接のindexは" + (i + (vertical * count)) + (k + (horizontal * count)) + "石は、" + arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] + "の石が置かれている");
 
         console.log(count)
         console.log((vertical * count))
@@ -531,11 +511,12 @@ function flipStone(i, k, vertical, horizontal, own, opponent, count) {
 
             if (arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] == own) {
                 // 再起した数だけ石をひっくり返す
+                console.log(count + "個の石をひっくり返すぞ");
                 for (let m = 1; m < count; m++) {
-
+                    console.log(count + "個の石をひっくり返すぞ");
                     arrayRecord2D[i + (vertical * m)][k + (horizontal * m)] = own
 
-                    // console.log("隣接する石" + (i + ((k * direction) * sign)) + "の" + opponentColor + "を" + ownColor + "にひっくり返す")
+                    console.log("隣接する石" + (i + (vertical * m)) + "" + (k + (horizontal * m)) + "の" + opponent + "を" + own + "にひっくり返す")
                 }
 
             } else {
