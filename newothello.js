@@ -216,49 +216,50 @@ function drawing() {
 }
 
 
-// // ---PART.6---ルール上、石が置けるか置けないかを確認する----------
+// // ---PART.７---ルール上、石が置けるか置けないかを確認する----------
 
-// // ---PART.6-1-1 黒石が置けるか置けないかを判定する
-// function ableCheckBlack() {
+// // ---PART.7-1-1 黒石が置けるか置けないかを判定する
+function ableCheckBlack() {
 
-for (let i = 0; i < 10; i++) {
-    for (let k = 0; k < 10; k++) {
-        // まず前回付与したclass="able"を削除する
-        // arrayRecord2D[i][k].classList.remove("able");
+    for (let i = 0; i < 10; i++) {
+        for (let k = 0; k < 10; k++) {
+            // まず前回付与したclass="able"を削除する
+            // arrayRecord2D[i][k].classList.remove("able");
 
-        //         // 引数  (i, k, count, direction, sign, ownColor, opponentColor)
-        //         // count は再起を何回繰り返したか
-
-
-        //         // 引数  (i, k, vertical, horizontal, ownColor, opponentColor)
-        //         // i と k は どの要素をクリックしたか
-
-        //         // minus1, zero0, plus1, はそのままの意味
-
-        //         // ownColor は自軍を, opponentColor 敵軍を表す。"b"は黒, "w"は白
+            //         // 引数  (i, k, count, direction, sign, ownColor, opponentColor)
+            //         // count は再起を何回繰り返したか
 
 
-        //         // （水平方向のチェック）
-        checkLine(i, k, 0, +1, "b", "w"); // 右方向へ
-        // checkLine(i, k, 0, -1, "b", "w"); // 左方向
-        //         // （垂直方向のチェック）
-        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 下方向
-        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 上方向
-        //         // （斜め方向のチェック）
-        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 右下方向
-        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 左上方向
-        //         // （斜め方向のチェック）
-        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 左下方向
-        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 右上方向
-        //     }
+            //         // 引数  (i, k, vertical, horizontal, ownColor, opponentColor)
+            //         // i と k は どの要素をクリックしたか
 
-        //     outer();
-        //     document.querySelector("#noticeBlack1").style.border = "15px dashed black"
-        //     document.querySelector("#noticeBlack4").style.border = "0px dashed black"
+            //         // minus1, zero0, plus1, はそのままの意味
+
+            //         // ownColor は自軍を, opponentColor 敵軍を表す。"b"は黒, "w"は白
+
+
+            //         // （水平方向のチェック）
+            checkLine(i, k, 0, +1, "b", "w"); // 右方向へ
+            // checkLine(i, k, 0, -1, "b", "w"); // 左方向
+            //         // （垂直方向のチェック）
+            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 下方向
+            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 上方向
+            //         // （斜め方向のチェック）
+            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 右下方向
+            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 左上方向
+            //         // （斜め方向のチェック）
+            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 左下方向
+            //         checkLine(i, k, -1, 0, +1, "b", "w"); // 右上方向
+            //     }
+
+            //     outer();
+            //     document.querySelector("#noticeBlack1").style.border = "15px dashed black"
+            //     document.querySelector("#noticeBlack4").style.border = "0px dashed black"
+        }
     }
 }
 
-// // ---PART.6-1-2 白石が置けるか置けないか
+// // ---PART.7-1-2 白石が置けるか置けないか
 
 // function ableCheckWhite() {
 //     for (let i = 0; i < 100; i++) {
@@ -284,7 +285,7 @@ for (let i = 0; i < 10; i++) {
 
 
 
-// // ---PART.6-2
+// // ---PART.7-2
 // // 各方向（8方向をチェックする）
 
 // 引数  (i, k, vertical, horizontal, ownColor, opponentColor)
@@ -292,13 +293,13 @@ for (let i = 0; i < 10; i++) {
 // checkLine(i, k, 0, -1, "b", "w"); // 左方向
 
 
-
+    let count = 1;
 function checkLine(i, k, vertical, horizontal, own, opponent) {
 
     console.log("記録用配列" + arrayRecord2D);
     console.log("checkLine関数に来た回数" + (10 * i + k));
     console.log("チェックするindexは" + (10 * i + k));
-    let count = 1;
+
 
     if (arrayRecord2D[i][k] != 0) {
 
@@ -313,29 +314,63 @@ function checkLine(i, k, vertical, horizontal, own, opponent) {
         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
 
     } else {
-        if (arrayRecord2D[i + vertical][k + horizontal] == opponent) {
+        if (arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] == opponent) {
             // 隣は敵軍の石である前提だけれども、１つ隣から検索していく
             console.log("隣接は敵色だ");
             console.log("その隣も検索する");
             console.log("再起する");
             console.log("countは" + count);
             count = count + 1;
-            vertical = vertical * count;
-            horizontal = horizontal * count;
+            console.log("countは" + count);
+
+            console.log(i+""+k+""+vertical+""+horizontal+""+own+""+opponent);
             checkLine(i, k, vertical, horizontal, own, opponent);
         } else {
-            if (arrayRecord2D[i + vertical][k + horizontal] == ownColor) {
+            console.log("最後まで来た");
+
+
+            if (arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] == own) {
                 // 最後の石の"Color"が"ownColor"ならば
                 console.log("挟めるのでクリックできるようにする");
                 // クリック出来るようにするために。("inner")と("darkgreen")クラスを削除し。
                 // クリック出来るように("able")クラスを付与する（ついでに背景色も変える）
                 arraySquare2D[i][k].classList.add("able");
+            } else{
+                console.log("bagu???");
             }
         }
         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
     }
 
 }
+
+
+// } else {
+//     if (arrayRecord[i + ((count * direction) * sign)] == opponentColor) {
+//         // 隣は敵軍の石である前提だけれども、１つ隣から検索していく
+//         // console.log("隣接は敵色だ");
+//         // console.log("その隣も検索する);
+//         // console.log("再起する");
+//         count = count + 1;
+//         checkLine(i, count, direction, sign, ownColor, opponentColor);
+//     } else {
+//         if (arrayRecord[i + ((count * direction) * sign)] == ownColor) {
+//             // 最後の石の"Color"が"ownColor"ならば
+//             // console.log("挟めるのでクリックできるようにする");
+//             // クリック出来るようにするために。("inner")と("darkgreen")クラスを削除し。
+//             // クリック出来るように("able")クラスを付与する（ついでに背景色も変える）
+//             arraySquare[i].classList.add("able");
+//         }
+//     }
+//     // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
+// }
+
+
+
+
+
+
+
 
 
 // // ---PART.7---石を置く（クリックする）----------
