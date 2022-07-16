@@ -360,37 +360,10 @@ function checkLine(i, k, vertical, horizontal, own, opponent, count) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // // ---PART.8---石を置く（クリックする）----------
 // // クリックすると〇が黒色⇔白色と交互にでる。ルール上石を置けない所はクリックできない。
 // // 同じ場所には２度クリックできない。
-
+putStone()
 function putStone() {
     let count = 0;
     const passCount = 0;
@@ -398,6 +371,9 @@ function putStone() {
         for (let k = 0; k < 10; k++) {
 
             arraySquare2D[i][k].addEventListener('click', function () {
+
+                console.log("クリックされました")
+                // arraySquare2D[i][k].addEventListener('click', function () {
                 // お知らせを消す
                 // document.querySelector("#noticeBlack2").textContent = "";
                 // document.querySelector("#noticeBlack3").textContent = "";
@@ -407,28 +383,29 @@ function putStone() {
                     // console.log("黒でクリックしたときの配列は" + arrayRecord);
 
                     // class="able" を削除  class="black" を付与
-                    arraySquare[i].classList.remove("able");
+                    // arraySquare[i].classList.remove("able");
                     // arraySquare[i].classList.add("black");
 
                     // 記録用配列上で、挟んだ白石（w）を黒色（b）に書き換える
-                    flipStoneBlack(i);
+                    console.log("クリックされました")
+                    flipStoneBlack(i, k);
 
                     // ブラウザ上の表示を書き換える（記録用配列に沿って）
                     drawing();
 
                     // 後手（白軍）が置くことが可能なマスを調べる
-                    ableCheckWhite();
+                    // ableCheckWhite();
 
                     // もし後手（白軍）の置くところがなければパスする
                     // カウントを『+1』する
-                    const passCount = checkPass(count);
+                    // const passCount = checkPass(count);
                     // console.log(passCount)
                     // console.log(count + "に" + passCount + "を加える");
                     count = count + passCount;
                     // console.log("カウントは" + count + "になった");
 
                     // 勝敗を判定する
-                    checkWin()
+                    // checkWin()
 
                 } else {
                     arraySquare[i].classList.remove("able");
@@ -457,21 +434,21 @@ function putStone() {
 // ---PART.9---挟まれた石をひっくり返す----------
 // ---PART.9.1.1 黒石で挟んで白石をひっくり返す
 
-function flipStoneBlack(i) {
+function flipStoneBlack(i, k) {
     // どの方向の白石が黒色挟まれてひっくり返せるか確認する
     // 引数  (i, k, vertical, horizontal, own, opponent, count)
     // （水平方向のチェック）
-    checkLine(i, k, 0, +1, "b", "w", 1); // 右方向へ
-    checkLine(i, k, 0, -1, "b", "w", 1); // 左方向
+    flipStone(i, k, 0, +1, "b", "w", 1); // 右方向へ
+    flipStone(i, k, 0, -1, "b", "w", 1); // 左方向
     // （垂直方向のチェック）
-    checkLine(i, k, +1, 0, "b", "w", 1); // 下方向
-    checkLine(i, k, -1, 0, "b", "w", 1); // 上方向
+    flipStone(i, k, +1, 0, "b", "w", 1); // 下方向
+    flipStone(i, k, -1, 0, "b", "w", 1); // 上方向
     // // （斜め方向のチェック）
-    checkLine(i, k, +1, +1, "b", "w", 1); // 右下方向
-    checkLine(i, k, -1, -1, "b", "w", 1); // 左上方向
+    flipStone(i, k, +1, +1, "b", "w", 1); // 右下方向
+    flipStone(i, k, -1, -1, "b", "w", 1); // 左上方向
     // // （斜め方向のチェック）
-    checkLine(i, k, +1, -1, "b", "w", 1); // 左下方向
-    checkLine(i, k, -1, +1, "b", "w", 1); // 右上方向
+    flipStone(i, k, +1, -1, "b", "w", 1); // 左下方向
+    flipStone(i, k, -1, +1, "b", "w", 1); // 右上方向
 
     // // 記録用配列に、"自軍の色を" を記入する
     // arrayRecord[i] = "b";
@@ -545,14 +522,14 @@ function flipStone(i, k, vertical, horizontal, own, opponent, count) {
             console.log("countは" + count);
 
             console.log(i + "" + k + "" + vertical + "" + horizontal + "" + own + "" + opponent);
-            checkLine(i, k, vertical, horizontal, own, opponent, count);
+            flipStone(i, k, vertical, horizontal, own, opponent, count);
         } else {
             console.log("最後まで来た");
 
 
 
 
-           if (arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] == own) {
+            if (arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] == own) {
                 // 再起した数だけ石をひっくり返す
                 for (let m = 1; m < count; m++) {
 
@@ -560,6 +537,9 @@ function flipStone(i, k, vertical, horizontal, own, opponent, count) {
 
                     // console.log("隣接する石" + (i + ((k * direction) * sign)) + "の" + opponentColor + "を" + ownColor + "にひっくり返す")
                 }
+
+            } else {
+                console.log("bagu???");
             }
         }
     }
