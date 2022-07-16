@@ -1,5 +1,5 @@
 // ---PART.0  マス（square） 100個分の "div" を作る----------------------
-// ---class属性を付与、id属性を連番で付与する
+// ---class="square"属性を付与、id属性を連番で付与する
 
 for (let i = 0; i < 100; i++) {
     const newDivs = document.createElement("div");
@@ -13,41 +13,42 @@ for (let i = 0; i < 100; i++) {
 
 
 
-
 // ---PART.1  グローバルスコープの定数・配列・関数置き場-------------
 
 // ---PART.1.1.1  マス<div class="square">が 100個 入ったブラウザ表示用『arraySquare』配列風を作る（１次元配列） 
 // const arraySquare = document.querySelectorAll(".square");
 
+// ---PART.1.1.2  100個(10×10)が入った ２次元配列 に挑戦する 
 
-// ---PART.1.1.2  100個(10×10)が入った ２次元配列 を作ってみる 
+const arraySquare = document.querySelectorAll(".square");
 const arraySquare2D = [];
+
 for (let i = 0; i < 10; i++) {
-    const arrayRow = [];
+    const arraySquare1D = [];
     for (let k = 0; k < 10; k++) {
-        const newDivs = document.createElement("div");
-        arrayRow.push(newDivs);
+        arraySquare1D.push(arraySquare[(10 * i) + k]);
     }
-    console.log(arrayRow)
-    arraySquare2D.push(arrayRow);
+    arraySquare2D.push(arraySquare1D);
 }
-console.log(arraySquare2D)
+console.table(arraySquare2D);
+console.log("arraySquare2Dは" + arraySquare2D)
 
 
 // ---PART.1.2.1  記録用の配列『arrayRecord』を作る。（１次元配列）  
 // const arrayRecord = new Array(100).fill(0);
 // const arrayRecord = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-// ---PART.1.2.2  記録用の配列『arrayRecord』を作る。2次元配列に挑戦する
+// ---PART.1.2.2  記録用の配列『arrayRecord』を作る。2次元配列で作る
 const arrayRecord = new Array(100).fill(0);
 const arrayRecord2D = [];
 for (let i = 0; i < 10; i++) {
-    for (let k = 0; k < 10; k++) {
-        arrayRecord2D[i] = arrayRecord.slice(i * 10, (i + 1) * 10);
-    }
+    // for (let k = 0; k < 10; k++) {
+    arrayRecord2D[i] = arrayRecord.slice(i * 10, (i + 1) * 10);
+    // }
 }
-console.table(arrayRecord2D);
-console.log(arrayRecord2D[4][5]);
+// console.table(arrayRecord2D);
+// console.log("arrayRecord2Dは" + arrayRecord2D);
+
 
 // ---PART.1.3  勝敗を決める配列を作る
 const ArrayWhiteWin = [];
@@ -63,7 +64,7 @@ const minus = -1;
 //    ゲーム終了時の演出も考え、要素の並び順をすこし弄る（時計回りになるように）。
 //    class="outer" を付与する。。
 
-// ---PART.2.1  番兵さん。手打ち感満載（１次元配列）
+// ---PART.2.1.1  番兵さん。手打ち感満載（１次元配列）
 
 // const arrayOuterIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 19, 29, 39, 49, 59, 69, 79, 89, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 80, 70, 60, 50, 40, 30, 20, 10]
 // function arrayouter() {
@@ -73,7 +74,7 @@ const minus = -1;
 // }
 
 
-// ---PART.2.2  番兵さん。少し手打ち感を減らす（でも１次元配列）
+// ---PART.2.1.2  番兵さん。少し手打ち感を減らす（でも１次元配列）
 
 // // function outer() {
 // //     const arrayOuter = [];
@@ -90,7 +91,7 @@ const minus = -1;
 // // }
 
 
-// ---PART.2.3  番兵さん。2次元配列に挑戦する
+// ---PART.2.1.3  番兵さん。2次元配列に挑戦する
 
 const arrayOuterTop = [];// 上辺
 const arrayOuterRight = [];//右辺
@@ -98,36 +99,39 @@ const arrayOuterBottom = [];//下辺
 const arrayOuterLeft = [];//左辺
 const arrayOuter2D = [];//周辺
 
-
 outerSide();
 function outerSide() {
     for (let i = 0; i < 9; i++) {
-        arrayOuterTop.push(arraySquare[0 + (1 * i)]);
-        arrayOuterRight.push(arraySquare[9 + (10 * i)]);
-        arrayOuterBottom.push(arraySquare[99 - (1 * i)]);
-        arrayOuterLeft.push(arraySquare[90 - (10 * i)]);
+        arrayOuterTop.push(arraySquare2D[0][(1 * i)]);
+        arrayOuterRight.push(arraySquare2D[1 * i][9]);
+        arrayOuterBottom.push(arraySquare2D[9][9 - (1 * i)]);
+        arrayOuterLeft.push(arraySquare2D[9 - (1 * i)][0]);
     }
-}
-
-outer();
-function outer() {
     arrayOuter2D.push(arrayOuterTop);
     arrayOuter2D.push(arrayOuterRight);
     arrayOuter2D.push(arrayOuterBottom);
     arrayOuter2D.push(arrayOuterLeft);
+
+    //    class="outer" を付与する。。
+    outer();
+
 }
 
-console.log(arrayOuter2D);
-console.log(arrayOuter2D[2][5]);
-console.table(arrayOuter2D);
 
-for (let i = 0; i < 4; i++) {
-    for (let k = 0; k < 9; k++) {
-        arrayOuter2D[i][k].classList.add("outer");
+// ---PART.2.2  番兵さんにclass="outer" 属性を付与する。。
+
+// outer();
+function outer() {
+    for (let i = 0; i < 4; i++) {
+        for (let k = 0; k < 9; k++) {
+            arrayOuter2D[i][k].classList.add("outer");
+        }
     }
 }
 
 
+// console.table(arrayOuter2D);
+console.log("arrayOuter2Dは" + arrayOuter2D);
 
 
 // ---PART.3  盤面さん を作る---------
@@ -145,60 +149,71 @@ for (let i = 0; i < (arrayInner.length); i++) {
 //    真ん中に黒と白。黒は"b"、白は"w"
 //    勝敗の判定のため class="inner" は削除する
 
-arrayRecord[4][4] = "w";
-arrayRecord[4][5] = "b";
-arrayRecord[5][4] = "b";
-arrayRecord[5][5] = "w";
+// arrayRecord2D[4][4] = "w";
+// arrayRecord2D[4][5] = "b";
+// arrayRecord2D[5][4] = "b";
+// arrayRecord2D[5][5] = "w";
 
-arraySquare[44].classList.remove("inner");
-arraySquare[45].classList.remove("inner");
-arraySquare[54].classList.remove("inner");
-arraySquare[55].classList.remove("inner");
+// arraySquare2D[4][4].classList.remove("inner");
+// arraySquare2D[4][5].classList.remove("inner");
+// arraySquare2D[5][4].classList.remove("inner");
+// arraySquare2D[5][5].classList.remove("inner");
 
-
-arraySquare[44].classList.add("white");
-arraySquare[45].classList.add("black");
-arraySquare[54].classList.add("black");
-arraySquare[55].classList.add("white");
-
-
-console.log(arraySquare);
-console.log(arrayRecord);
-console.table(arraySquare);
-console.table(arrayRecord);
+// arraySquare2D[4][4].classList.add("white");
+// arraySquare2D[4][5].classList.add("black");
+// arraySquare2D[5][4].classList.add("black");
+// arraySquare2D[5][5].classList.add("white");
 
 
-// // ---PART.4  全てのはじまり
+arrayRecord2D[2][4] = "w";
+arrayRecord2D[2][5] = "b";
+arrayRecord2D[1][4] = "b";
+arrayRecord2D[1][5] = "w";
 
-// window.onload = function () {
-//     outer();   // PART.4  番兵さん。
-//     drawing(); // PART.5
-//     //     ableCheckBlack(); // PART.6-1-1
-//     //     putStone();       // PART.7
-// }
+arraySquare2D[2][4].classList.remove("inner");
+arraySquare2D[2][5].classList.remove("inner");
+arraySquare2D[1][4].classList.remove("inner");
+arraySquare2D[1][5].classList.remove("inner");
+
+arraySquare2D[2][4].classList.add("white");
+arraySquare2D[2][5].classList.add("black");
+arraySquare2D[1][4].classList.add("black");
+arraySquare2D[1][5].classList.add("white");
+
+
+// // ---PART.5  全てのはじまり
+
+console.log("arrayRecord2Dは" + arrayRecord2D);
+
+window.onload = function () {
+
+    // outer();   // PART.PART.2.2  番兵さんに。
+    drawing(); // PART.6
+    ableCheckBlack(); // PART.7-1-1
+    //     //     putStone();       // PART.8
+}
 
 
 
 
-// // ---PART.5---記録用の配列『arrayRecord』のスコアに合わせてブラウザ上の盤面を表示する----------
+// // ---PART.6---記録用の配列『arrayRecord』のスコアに合わせてブラウザ上の盤面を表示する----------
 
-// function drawing() {
-//     for (let i = 0; i < 100; i++) {
+function drawing() {
+    for (let i = 0; i < 10; i++) {
+        for (let k = 0; k < 10; k++) {
+            arraySquare2D[i][k].classList.remove("black");
+            arraySquare2D[i][k].classList.remove("white");
 
-//         // arraySquare[i].classList.remove("darkgreen");
-//         arraySquare[i].classList.remove("black");
-//         arraySquare[i].classList.remove("white");
-
-//         if (arrayRecord[i] == "b") {
-//             arraySquare[i].classList.add("black");
-//         } else if (arrayRecord[i] == "w") {
-//             arraySquare[i].classList.add("white");
-//         } else if (arrayRecord[i] == 0) {
-
-//         } else {
-//         }
-//     }
-// }
+            if (arrayRecord2D[i][k] == "b") {
+                arraySquare2D[i][k].classList.add("black");
+            } else if (arrayRecord2D[i][k] == "w") {
+                arraySquare2D[i][k].classList.add("white");
+            } else if (arrayRecord2D[i][k] == 0) {
+            } else {
+            }
+        }
+    }
+}
 
 
 // // ---PART.6---ルール上、石が置けるか置けないかを確認する----------
@@ -206,39 +221,42 @@ console.table(arrayRecord);
 // // ---PART.6-1-1 黒石が置けるか置けないかを判定する
 // function ableCheckBlack() {
 
-//     for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10; i++) {
+    for (let k = 0; k < 10; k++) {
+        // まず前回付与したclass="able"を削除する
+        // arrayRecord2D[i][k].classList.remove("able");
 
-//         // まず前回付与したclass="able"を削除する
-//         arraySquare[i].classList.remove("able");
-
-
-//         // 引数  (i, count, direction, sign, ownColor, opponentColor)
-//         // i はindex どこをクリックしたか
-//         // count は再起を何回繰り返したか
-//         // direction は「等差数列」におけるindexの「公差」を表す。
-//         //             水平方向なら公差は「1」、垂直方向なら「10」、斜め\ は「11」、斜め/ は「9」。
-//         // sign は進行方向。順走ならplus（+1）を、逆走ならminus（-1）を。
-//         // ownColor は自軍を, opponentColor 敵軍を表す。"b"は黒, "w"は白
+        //         // 引数  (i, k, count, direction, sign, ownColor, opponentColor)
+        //         // count は再起を何回繰り返したか
 
 
-//         // （水平方向のチェック）
-//         checkLine(i, 1, 1, plus, "b", "w"); // 右方向へ
-//         checkLine(i, 1, 1, minus, "b", "w"); // 左方向
-//         // （垂直方向のチェック）
-//         checkLine(i, 1, 10, plus, "b", "w"); // 下方向
-//         checkLine(i, 1, 10, minus, "b", "w"); // 上方向
-//         // （斜め方向のチェック）
-//         checkLine(i, 1, 11, plus, "b", "w"); // 右下方向
-//         checkLine(i, 1, 11, minus, "b", "w"); // 左上方向
-//         // （斜め方向のチェック）
-//         checkLine(i, 1, 9, plus, "b", "w"); // 左下方向
-//         checkLine(i, 1, 9, minus, "b", "w"); // 右上方向
-//     }
+        //         // 引数  (i, k, vertical, horizontal, ownColor, opponentColor)
+        //         // i と k は どの要素をクリックしたか
 
-//     outer();
-//     document.querySelector("#noticeBlack1").style.border = "15px dashed black"
-//     document.querySelector("#noticeBlack4").style.border = "0px dashed black"
-// }
+        //         // minus1, zero0, plus1, はそのままの意味
+
+        //         // ownColor は自軍を, opponentColor 敵軍を表す。"b"は黒, "w"は白
+
+
+        //         // （水平方向のチェック）
+        checkLine(i, k, 0, +1, "b", "w"); // 右方向へ
+        // checkLine(i, k, 0, -1, "b", "w"); // 左方向
+        //         // （垂直方向のチェック）
+        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 下方向
+        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 上方向
+        //         // （斜め方向のチェック）
+        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 右下方向
+        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 左上方向
+        //         // （斜め方向のチェック）
+        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 左下方向
+        //         checkLine(i, k, -1, 0, +1, "b", "w"); // 右上方向
+        //     }
+
+        //     outer();
+        //     document.querySelector("#noticeBlack1").style.border = "15px dashed black"
+        //     document.querySelector("#noticeBlack4").style.border = "0px dashed black"
+    }
+}
 
 // // ---PART.6-1-2 白石が置けるか置けないか
 
@@ -262,43 +280,62 @@ console.table(arrayRecord);
 // }
 
 
+
+
+
+
 // // ---PART.6-2
 // // 各方向（8方向をチェックする）
-// function checkLine(i, count, direction, sign, ownColor, opponentColor) {
-//     // console.log((i + 1) + "回目のcheckLine関数に来た");
-//     // console.log("チェックするindexは" + i);
 
-//     if (arrayRecord[i] != 0) {
-//         // console.log("0でない。既に石が置かれている");
-//         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
+// 引数  (i, k, vertical, horizontal, ownColor, opponentColor)
+// checkLine(i, k, 0, +1, "b", "w"); // 右方向へ
+// checkLine(i, k, 0, -1, "b", "w"); // 左方向
 
-//     } else if (arrayRecord[i + (direction * sign)] != opponentColor) {
-//         // console.log("隣は敵色でない");
-//         // // 敵軍以外、つまり
-//         // console.log("隣接は石が置かれていないか、あるいは、自軍の石が置かれている");
-//         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
 
-//     } else {
-//         if (arrayRecord[i + ((count * direction) * sign)] == opponentColor) {
-//             // 隣は敵軍の石である前提だけれども、１つ隣から検索していく
-//             // console.log("隣接は敵色だ");
-//             // console.log("その隣も検索する);
-//             // console.log("再起する");
-//             count = count + 1;
-//             checkLine(i, count, direction, sign, ownColor, opponentColor);
-//         } else {
-//             if (arrayRecord[i + ((count * direction) * sign)] == ownColor) {
-//                 // 最後の石の"Color"が"ownColor"ならば
-//                 // console.log("挟めるのでクリックできるようにする");
-//                 // クリック出来るようにするために。("inner")と("darkgreen")クラスを削除し。
-//                 // クリック出来るように("able")クラスを付与する（ついでに背景色も変える）
-//                 arraySquare[i].classList.add("able");
-//             }
-//         }
-//         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
-//     }
 
-// }
+function checkLine(i, k, vertical, horizontal, own, opponent) {
+
+    console.log("記録用配列" + arrayRecord2D);
+    console.log("checkLine関数に来た回数" + (10 * i + k));
+    console.log("チェックするindexは" + (10 * i + k));
+    let count = 1;
+
+    if (arrayRecord2D[i][k] != 0) {
+
+        console.log("indexは" + (i) + (k) + "です。0でない。既に石が置かれている");
+        // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
+
+    } else if (arrayRecord2D[i + vertical][k + horizontal] != opponent) {
+        // console.log("隣は敵色でない");
+        // // 敵軍以外、つまり
+        console.log("indexは" + (i) + (k) + "です。記録は0だ!でも残念");
+        console.log("隣接はのindexは" + (i + vertical) + (k + horizontal) + "石が置かれていないか、あるいは、自軍の石が置かれている");
+        // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
+
+    } else {
+        if (arrayRecord2D[i + vertical][k + horizontal] == opponent) {
+            // 隣は敵軍の石である前提だけれども、１つ隣から検索していく
+            console.log("隣接は敵色だ");
+            console.log("その隣も検索する");
+            console.log("再起する");
+            console.log("countは" + count);
+            count = count + 1;
+            vertical = vertical * count;
+            horizontal = horizontal * count;
+            checkLine(i, k, vertical, horizontal, own, opponent);
+        } else {
+            if (arrayRecord2D[i + vertical][k + horizontal] == ownColor) {
+                // 最後の石の"Color"が"ownColor"ならば
+                console.log("挟めるのでクリックできるようにする");
+                // クリック出来るようにするために。("inner")と("darkgreen")クラスを削除し。
+                // クリック出来るように("able")クラスを付与する（ついでに背景色も変える）
+                arraySquare2D[i][k].classList.add("able");
+            }
+        }
+        // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
+    }
+
+}
 
 
 // // ---PART.7---石を置く（クリックする）----------

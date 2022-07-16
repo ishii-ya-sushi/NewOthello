@@ -90,11 +90,9 @@ footer {
 .square {
     width: 85px;
     height: 85px;
-    /* margin: 2px 2px; */
     background-color: darkgreen;
     color: darkgreen;
     font-size: 85px;
-    /* font-size: 80px; */
     line-height: 1.0;
     text-align: center;
     border: 7px double white;
@@ -126,11 +124,6 @@ footer {
     cursor: pointer;
     /* font-size:0; */
 }
-
-/* .darkgreen {
-    color: darkgreen;
-    pointer-events: none;
-} */
 
 .black {
     color: black;
