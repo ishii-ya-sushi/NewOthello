@@ -690,71 +690,63 @@ function headLine1(sentence) {
 
 
 
-
+//---PART.15---演出----------
 // ---STEP.2.1 part-2  番兵さん。少し手打ち感を減らす（でも１次元配列）
 // // function outer() {
 // //     const arraySwirl = [];
-const arraySwirl = [];//周辺
+// const arraySwirl = [];//周辺
 
-// swirl();
-function swirl() {
-    const count = 0;
-
-    for (let i = 0; i < 4; i++) {
-
-
-
-        for (let k = 0; k < 9 - (i * 2); k++) {
+// // swirl();
+// function swirl() {
+//     let top = 0;
+//     let right = 9;
+//     let bottom = 18;
+//     let left = 27;
+//     let count = 1;
 
 
-
-            arraySwirl[0 + (count + count) + k] = arraySquare[(0 + (11 * i)) + (1 * k)];
-            arraySwirl[25 + k] = arraySquare[(9 + (9 * i)) + (10 * k)];
-            arraySwirl[50 + k] = arraySquare[(99 - (11 * i)) - (1 * k)];
-            arraySwirl[75 + k] = arraySquare[(90 - (9 * i)) - (10 * k)];
-        }
-        const count2 = 9 - (i * 2)
-    }
-    console.log(arraySwirl);
-
-    console.log(arraySwirl[0]);
-    console.log(arraySwirl[25]);
-    console.log(arraySwirl[50]);
-    console.log(arraySwirl[75]);
+//     for (let i = 0; i < 3; i++) {
 
 
-
-
-    console.log(arraySwirl.length);
-    console.table(arraySwirl);
-}
-
-
-// function sideSider() {
-
-//     for (let i = 0; i < 4; i++) {
 //         for (let k = 0; k < 9 - (i * 2); k++) {
-//             arrayTop.push(arraySquare[(0 + i)][(0 + i) + (1 * k)]);
-//             arrayRight.push(arraySquare[(0 + i) + (1 * k)][9 - i]);
-//             arrayBottom.push(arraySquare[(9 - i)][(9 - i) - (1 * k)]);
-//             arrayLeft.push(arraySquare[(9 - i) - (1 * k)][(0 + i)]);
-//         }
 
-//         c.push(arrayTop);
-//         array2D.push(arrayRight);
-//         array2D.push(arrayBottom);
-//         array2D.push(arrayLeft);
+//             arraySwirl[top + k] = arraySquare[(0 + (11 * i)) + (1 * k)];
+//             arraySwirl[right + k] = arraySquare[(9 + (9 * i)) + (10 * k)];
+//             arraySwirl[bottom + k] = arraySquare[(99 - (11 * i)) - (1 * k)];
+//             arraySwirl[left + k] = arraySquare[(90 - (9 * i)) - (10 * k)];
+//             console.log(left + k);
+//             console.log((90 - (9 * i)) - (10 * k));
+//         }
+//         top = left + ((11) - ((count * 2) * count));
+//         console.log(top);
+//         right = top + (9 - ((count * 2) * count));
+//         bottom = right + (9 - ((count * 2) * count));
+//         left = bottom + (9 - ((count * 2) * count));
+
+//         count++;
+
+
+
 
 //     }
+//     // console.log(arraySwirl);
 
-//     console.table(array2D[0].length);
+//     console.log(arraySwirl.length);
+//     // console.table(arraySwirl);
 
+//         arraySwirl[64].textContent = 64
+//         arraySwirl[64].style.color = "black";
+//         console.log(arraySwirl[65]);
 
-//     for (let i = 0; i < 4; i++) {
-//         console.log(array2D[i]);
-//         // console.table(array2D);
+//     for (let i = 0; i < 65; i++) {
+//         arraySwirl[i].textContent = i
+//         arraySwirl[i].style.color = "black";
 //     }
 // }
+
+
+
+
 
 
 
