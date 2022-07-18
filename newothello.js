@@ -262,6 +262,8 @@ function putStone() {
         for (let k = 0; k < 10; k++) {
 
             arraySquare2D[i][k].addEventListener('click', function () {
+                
+                notice(count);
 
                 console.log("index[" + i + "][" + k + "]にクリックされました")
                 // お知らせを消す
@@ -332,7 +334,6 @@ function putStone() {
                 count = count + 1;
                 console.log("クリックのカウントは" + count);
 
-                notice(count);
                 console.log("得点表を更新する");
 
             })
