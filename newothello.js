@@ -1,4 +1,4 @@
-// ---PART.0  マス（square） 100個分の "div" を作る----------------------
+// ---STEP.0  マス（square） 100個分の "div" を作る----------------------
 //    class="square"属性を付与、id属性を連番で付与する
 
 for (let i = 0; i < 100; i++) {
@@ -12,12 +12,12 @@ for (let i = 0; i < 100; i++) {
 }
 
 
-// ---PART.1  グローバルスコープの定数・配列・関数置き場-------------
+// ---STEP.1  グローバルスコープの定数・配列・関数置き場-------------
 
-// ---PART.1.1-1  マス<div class="square">が 100個 入ったブラウザ表示用『arraySquare』配列風を作る（１次元配列） 
+// ---STEP.1.1 part1  マス<div class="square">が 100個 入ったブラウザ表示用『arraySquare』配列風を作る（１次元配列） 
 // const arraySquare = document.querySelectorAll(".square");
 
-// ---PART.1.1-2  100個(10×10)が入った ２次元配列 に挑戦する 
+// ---STEP.1.1 part2  100個(10×10)が入った ２次元配列 に挑戦する 
 const arraySquare = document.querySelectorAll(".square");
 const arraySquare2D = [];
 
@@ -30,11 +30,11 @@ for (let i = 0; i < 10; i++) {
 }
 // console.table(arraySquare2D);
 
-// ---PART.1.2-1  記録用の配列『arrayRecord』を作る。要素数は100個。（１次元配列）  
+// ---STEP.1.2 part1  記録用の配列『arrayRecord』を作る。要素数は100個。（１次元配列）  
 // const arrayRecord = new Array(100).fill(0);
 // const arrayRecord = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-// ---PART.1.2-2  記録用の配列『arrayRecord』を作る。2次元配列で作る
+// ---STEP.1.2 part2  記録用の配列『arrayRecord』を作る。2次元配列で作る
 const arrayRecord = new Array(100).fill(0);
 const arrayRecord2D = [];
 for (let i = 0; i < 10; i++) {
@@ -45,17 +45,17 @@ for (let i = 0; i < 10; i++) {
 
 
 
-// ---PART.2  番兵さん を作る---------
+// ---STEP.2  番兵さん を作る---------
 //    arraySquare配列から番兵さん用に、盤面の外周の<div>を選り出し、arrayOuter配列 を作る。
 //    ゲーム終了時の演出も考え、要素の並び順をすこし弄る（時計回りになるように）。
 //    class="outer" を付与する。。
 
-// ---PART.2.1-1  番兵さん。手打ち感満載（１次元配列）
+// ---STEP.2.1 part1  番兵さん。手打ち感満載（１次元配列）
 // const arrayOuterIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 19, 29, 39, 49, 59, 69, 79, 89, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 80, 70, 60, 50, 40, 30, 20, 10]
 // function arrayouter() {
 // }
 
-// ---PART.2.1-2  番兵さん。少し手打ち感を減らす（でも１次元配列）
+// ---STEP.2.1 part-2  番兵さん。少し手打ち感を減らす（でも１次元配列）
 // // function outer() {
 // //     const arrayOuter = [];
 // //     for (let i = 0; i < 9; i++) {
@@ -66,7 +66,7 @@ for (let i = 0; i < 10; i++) {
 // //     }
 // // }
 
-// ---PART.2.1-3  番兵さん。2次元配列に挑戦する
+// ---STEP.2.1 part3  番兵さん。2次元配列に挑戦する
 const arrayOuterTop = [];// 上辺
 const arrayOuterRight = [];//右辺
 const arrayOuterBottom = [];//下辺
@@ -90,12 +90,13 @@ function outerSide() {
 }
 // console.table(arrayOuter2D);
 
-// ---PART.2.2  番兵さんにclass="outer" 属性を付与する。。
+// ---STEP.2.2  番兵さんにclass="outer" 属性を付与する。。
 outer();
 function outer() {
     for (let i = 0; i < 4; i++) {
         for (let k = 0; k < 9; k++) {
             arrayOuter2D[i][k].classList.add("outer");
+            arrayOuter2D[i][k].textContent = "☆";
         }
     }
 }
@@ -103,7 +104,7 @@ function outer() {
 // console.table(arrayOuter2D);
 
 
-// ---PART.3-1  盤面さん を作る---------
+// ---STEP.3 part1  盤面さん を作る---------
 //    arraySquare配列から番兵さんを除いた『(".square:not(.outer)")』、
 //    ６４（8×8）個のマスでarrayInner配列を作る。// class="inner" を付与する。
 
@@ -112,7 +113,7 @@ function outer() {
 //     arrayInner[i].classList.add("inner");
 // }
 
-// ---PART.3-2  盤面さん を作る---失敗------
+// ---STEP.3 part2  盤面さん を作る---失敗------
 // const arrayInner = [];
 // for (let i = 0; i < 8; i++) {
 //     arrayInner[i] = arraySquare.slice(1 + (i * 10), (i + 1) * 9);
@@ -125,8 +126,7 @@ function outer() {
 // そもそもアレイ風にはslice()は使えない？？？
 
 
-
-// ---PART.4  記録用の配列『arrayRecord』にゲーム開始時のスコア（配置）を入力する-------------
+// ---STEP.4  記録用の配列『arrayRecord』にゲーム開始時のスコア（配置）を入力する-------------
 //    真ん中に黒と白を置く。スコアは、黒は"b"、白は"w"、空白は"0" とする
 
 arrayRecord2D[4][4] = "w";
@@ -134,30 +134,21 @@ arrayRecord2D[4][5] = "b";
 arrayRecord2D[5][4] = "b";
 arrayRecord2D[5][5] = "w";
 
-// arraySquare2D[4][4].classList.remove("inner");
-// arraySquare2D[4][5].classList.remove("inner");
-// arraySquare2D[5][4].classList.remove("inner");
-// arraySquare2D[5][5].classList.remove("inner");
 
-
-// // ---PART.5  全てのはじまり
+// ---STEP.5  全てのはじまり
 
 window.onload = function () {
 
-    drawing();    // PART.6
+    drawing();    // SREP.6
+    ableCheck("b", "w"); // SREP.7-2   先手の黒石が置ける場所を探す
+    putStone();       // SREP.8
 
-    ableCheck("b", "w"); // PART.7-2   先手の黒石が置ける場所を探す
-
-    putStone();       // PART.8
-
-    // squaresOpacity();
-    // squaresOpacity(".black");
-    // squaresOpacity(".white");
+    swirl();
 
 }
 
 
-// // ---PART.6---記録用の配列『arrayRecord』のスコアに合わせてブラウザ上の盤面を表示する----------
+// ---STEP.6---記録用の配列『arrayRecord』のスコアに合わせてブラウザ上の盤面を表示する----------
 
 function drawing() {
     for (let i = 0; i < 10; i++) {
@@ -179,10 +170,10 @@ function drawing() {
 }
 
 
-// ---PART.7---ルール上、石が置けるか置けないかを確認する----------
-// ---PART.7.1---8方向チェックするための準備をする-------
+// ---STEP.7---ルール上、石が置けるか置けないかを確認する----------
+// ---STEP.7.1---8方向チェックするための準備をする-------
 //    仮引数  (own, opponent)
-//    黒石のときは（"b", "w"）で、白石のときは（"w", "b"）で、置けるか置けないかを判定する
+//    先手（黒石）のときは（"b", "w"）で、後手（白石）のときは（"w", "b"）で、置けるか置けないかを判定する
 
 function ableCheck(own, opponent) {
 
@@ -213,7 +204,7 @@ function ableCheck(own, opponent) {
 
 
 
-// ---PART.7.2---8方向チェックをチェックする-------
+// ---STEP.7.2---8方向チェックをチェックする-------
 
 //    引数  (i, k, vertical, horizontal, own, opponent, count)
 function checkLine(i, k, vertical, horizontal, own, opponent, count) {
@@ -238,8 +229,9 @@ function checkLine(i, k, vertical, horizontal, own, opponent, count) {
             // console.log("更にその隣のindexは" + (i + (vertical * count)) + (k + (horizontal * count)) + "石は、 敵軍の石が置かれている");
 
             console.log("再起する");
-            checkLine(i, k, vertical, horizontal, own, opponent, count);
+            console.log("再起した。countは" + count);
 
+            checkLine(i, k, vertical, horizontal, own, opponent, count);
 
         } else {
             console.log("else { 更にその相手の最後の石の隣が、自身の石か、あるいは石が置かれていないか");
@@ -257,14 +249,13 @@ function checkLine(i, k, vertical, horizontal, own, opponent, count) {
         }
         // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
     }
-
 }
 
 
 
-// // ---PART.8---石を置く（クリックする）----------
-// // クリックすると〇が黒色⇔白色と交互にでる。ルール上石を置けない所はクリックできない。
-// // 同じ場所には２度クリックできない。
+// ---STEP.8---石を置く（クリックする）----------
+//    クリックすると〇が黒色⇔白色と交互にでる。ルール上石を置けない所はクリックできない。
+//    同じ場所には２度クリックできない。
 // putStone();
 function putStone() {
     let count = 0;
@@ -293,20 +284,21 @@ function putStone() {
                     ableCheck("w", "b");
 
                     // もし後手（白軍）の置くところがなければパスする
-                    // カウントを『+1』する
+                    // クリックの count を『+1』する
                     const passCount = checkPass(count);
-
                     if (passCount == 1) {
+                        console.log("後手（白軍）の置くところがなかったので『1』がリターンされた");
 
                         const ArrayPass = document.querySelectorAll(".able");
-
+                        // 先手（黒軍）が置くことが可能なマス も 調べる
                         if (ArrayPass.length == 0) {
-
+                            console.log("先手（黒軍） も 置くところがなかった。");
+                            console.log("ので、試合終了");
+                            // 勝負判定に
                             checkWin();
                         } else {
                         }
                     }
-                    // console.log(passCount)
                     // console.log(count + "に" + passCount + "を加える");
                     count = count + passCount;
                     // console.log("カウントは" + count + "になった");
@@ -321,18 +313,37 @@ function putStone() {
                     ableCheck("b", "w");
 
                     const passCount = checkPass(count);
+                    if (passCount == 1) {
+                        console.log("後手（黒軍）の置くところがなかったので『1』がリターンされた");
+
+                        const ArrayPass = document.querySelectorAll(".able");
+                        // 後手（白軍）が置くことが可能なマス も 調べる
+                        if (ArrayPass.length == 0) {
+                            console.log("後手（白軍） も 置くところがなかった。");
+                            console.log("ので、試合終了");
+                            // 勝負判定に
+                            checkWin();
+                        } else {
+                        }
+                    }
+
+                    // 相手がパスしていたら、クリックされた count にリターンされたpassCountの『1』が加わる。
                     count = count + passCount;
 
-                    checkWin();
                 }
                 count = count + 1;
+                console.log("クリックのカウントは" + count);
+
+                notice(count);
+                console.log("得点表を更新する");
+
             })
         }
     }
 }
 
 
-// ---PART.9---挟まれた石をひっくり返す----------
+// ---STEP.9---挟まれた石をひっくり返す----------
 //    備忘録
 //     // どの方向の白石が黒色に挟まれてひっくり返せるか確認する
 //     // 引数  (i, k, vertical, horizontal, own, opponent, count)
@@ -364,7 +375,7 @@ function putStone() {
 
 
 
-// // ---PART.9-2 黒石（"b", "w"）に、白石（"w", "b"）にひっくり返す
+// ---STEP.9-2 黒石（"b", "w"）に、白石（"w", "b"）にひっくり返す
 
 function checkFlip(i, k, own, opponent) {
     // どの方向の白石が黒色挟まれてひっくり返せるか確認する
@@ -382,55 +393,46 @@ function checkFlip(i, k, own, opponent) {
     flipStone(i, k, +1, -1, own, opponent, 1); // 左下方向
     flipStone(i, k, -1, +1, own, opponent, 1); // 右上方向
 
-    // // 記録用配列に、"自軍の色を" を記入する
+    // 記録用配列に、"自軍の色を" を記入する
     arrayRecord2D[i][k] = own;
-    // // 表示用配列から、class=""inner"を削除する
-    // arraySquare[i].classList.remove("inner");
-
 }
 
 
-
-
-// // ---PART.9.2
-// // 各方向（8方向をチェックし、ひっくり返す）
+// ---STEP.9.2
+//    各方向（8方向をチェックし、ひっくり返す）
 // flipStone()
 function flipStone(i, k, vertical, horizontal, own, opponent, count) {
 
     if (arrayRecord2D[i][k] != 0 || arraySquare2D[i][k].classList.contains("outer")) {
-
-        console.log("indexは" + (i) + (k) + "です。0でない。既に石が置かれているか、または番兵さんか");
-        // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
+        console.log("if ( 石が置かれている   または   番兵さん ) なので");
+        // console.log("ルール上、石を置けない。クリックできないままにする");
+        // console.log("indexは" + (i) + (k) + "です);
 
     } else if (arrayRecord2D[i + vertical][k + horizontal] != opponent) {
-        // console.log("隣は敵色でない");
-        // // 敵軍以外、つまり
-        console.log("indexは" + (i) + (k) + "です。記録は0だ!でも残念");
-        console.log("隣接はのindexは" + (i + vertical) + (k + horizontal) + "石が置かれていないか、あるいは、自軍の石が置かれている");
-        // console.log("などの理由でルール上、石を置けない。クリックできないままにする");
+        console.log("if ( 隣接の石は相手の石でない。つまり自分の石が置かれているか、あるいは石が置かれていないか ) なので");
+        // console.log("ルール上、石を置けない。クリックできないままにする");
+        // console.log("隣接はのindexは" + (i + vertical) + (k + horizontal) + "です");
 
     } else {
-
-        // console.log(i + "と" + k + "と" + vertical + "と" + horizontal + "と" + own + "と" + opponent + "と" + count);
-        console.log(count + "個。隣接のindexは" + (i + (vertical * count)) + (k + (horizontal * count)) + "石は、" + arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] + "の石が置かれている");
-
         if (arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] == opponent) {
-            // 隣は敵軍の石である前提だけれども、１つ隣から検索していく
-            // console.log("隣接は敵色だ");
-            // console.log("その隣も検索する");
-            console.log("再起する");
-            // console.log("countは" + count);
+            console.log("if ( 隣接の石は相手の石である。) なので");
+            console.log("更にその隣も検索する");
+
             count = count + 1;
+            // console.log("countは" + count);
+            // console.log("更にその隣のindexは" + (i + (vertical * count)) + (k + (horizontal * count)) + "石は、 敵軍の石が置かれている");
+
+            console.log("再起する");
             console.log("再起した。countは" + count);
 
-            // console.log(i + "" + k + "" + vertical + "" + horizontal + "" + own + "" + opponent);
             flipStone(i, k, vertical, horizontal, own, opponent, count);
         } else {
-            console.log("最後まで来た");
-
+            console.log("else { 更にその相手の最後の石の隣が、自身の石か、あるいは石が置かれていないか");
+            //if (     隣接の石が相手の相手の石......ならば                )
             if (arrayRecord2D[i + (vertical * count)][k + (horizontal * count)] == own) {
-                // 再起した数だけ石をひっくり返す
-                console.log(count + "個の石をひっくり返すぞ");
+                console.log("if ( 相手の最後の石の隣が自身の石 ) なので");
+                console.log("挟めるので再起した数の" + count + "の石をひっくり返す");
+
                 for (let m = 1; m < count; m++) {
                     console.log(count + "個の石をひっくり返すぞ");
                     arrayRecord2D[i + (vertical * m)][k + (horizontal * m)] = own
@@ -445,10 +447,31 @@ function flipStone(i, k, vertical, horizontal, own, opponent, count) {
 }
 
 
+// ---STEP.10---得点表----------
+//    現在の石の数を表示
 
+function notice(count) {
+    const arrayBlack = document.querySelectorAll(".black");
+    const arrayWhite = document.querySelectorAll(".white");
 
-// // ---PART.10---パスする----------
-// // 石を置く場所がない場合はパスになる
+    document.querySelector("#noticeBlack1").textContent = "黒 " + arrayBlack.length;
+    document.querySelector("#noticeBlack1").style.fontSize = "60px";
+    document.querySelector("#noticeBlack4").textContent = "白 " + arrayWhite.length;
+    document.querySelector("#noticeBlack4").style.fontSize = "60px";
+
+    if (count % 2 === 0) {
+        // document.querySelector("#noticeBlack3").textContent = "白の置くところはあります。";
+        document.querySelector("#noticeBlack1").style.border = "0px dashed black";
+        document.querySelector("#noticeBlack4").style.border = "15px dashed white";
+    } else {
+        // document.querySelector("#noticeBlack2").textContent = "黒の置くところはあります。";
+        document.querySelector("#noticeBlack1").style.border = "15px dashed black";
+        document.querySelector("#noticeBlack4").style.border = "0px dashed white";
+    }
+}
+
+// ---STEP.11---パスする----------
+//    石を置く場所がない場合はパスになる
 
 function checkPass(count) {
 
@@ -492,65 +515,42 @@ function checkPass(count) {
         console.log("『+1』をリターンする");
         return 1;
     } else {
-        if (count % 2 === 0) {
-            // document.querySelector("#noticeBlack3").textContent = "白の置くところはあります。";
-            document.querySelector("#noticeBlack1").style.border = "0px dashed black";
-            document.querySelector("#noticeBlack4").style.border = "15px dashed white";
-        } else {
-            // document.querySelector("#noticeBlack2").textContent = "黒の置くところはあります。";
-            document.querySelector("#noticeBlack1").style.border = "15px dashed black";
-            document.querySelector("#noticeBlack4").style.border = "0px dashed white";
-        }
-
+        // console.log("置くところがありません。そのままです。（パスなし）");
         return 0;
     }
 }
 
-// console.log(arrayRecord);
 
-
-// // ---PART.11---勝敗を確かめる----------
+// ---STEP.12---勝敗を確かめる----------
+//    先手後手（または後手先手）と連続して石が置けるところがなかった場合
 
 function checkWin() {
-    const arrayAble = document.querySelectorAll(".able");
-    const arrayInner = document.querySelectorAll(".inner");
+    // const arrayAble = document.querySelectorAll(".able");
     const arrayBlack = document.querySelectorAll(".black");
     const arrayWhite = document.querySelectorAll(".white");
 
-    // 現在の石の数を表示
-    document.querySelector("#noticeBlack1").textContent = "黒 " + arrayBlack.length;
-    document.querySelector("#noticeBlack1").style.fontSize = "60px";
-    document.querySelector("#noticeBlack4").textContent = "白 " + arrayWhite.length;
-    document.querySelector("#noticeBlack4").style.fontSize = "60px";
+    if (arrayBlack.length > arrayWhite.length) {
+        // console.log("黒の勝ち");
+        document.querySelector("#noticeBlack2").textContent = "黒の勝ち";
+        youwin();
+    } else if (arrayBlack.length < arrayWhite.length) {
+        // console.log("白の勝ち");
+        document.querySelector("#noticeBlack3").textContent = "白の勝ち";
+        youlose();
 
-
-
-    // (石が置けるマスが０ 且つ 空白のマスが０) または (黒石が０ または 白石が０)のとき
-    if ((arrayAble.length == 0 && arrayInner.length == 0) || (arrayBlack.length == 0 || arrayWhite.length == 0)) {
-        if (arrayBlack.length > arrayWhite.length) {
-            // console.log("黒の勝ち");
-            document.querySelector("#noticeBlack2").textContent = "黒の勝ち";
-            youwin();
-        } else if (arrayBlack.length < arrayWhite.length) {
-            // console.log("白の勝ち");
-            document.querySelector("#noticeBlack3").textContent = "白の勝ち";
-            youlose();
-
-        } else if (arrayBlack.length == arrayWhite.length) {
-            // console.log("引き分け");
-            document.querySelector("#noticeBlack2").textContent = "引き分け";
-            document.querySelector("#noticeBlack3").textContent = "引き分け";
-            draw();
-        } else {
-        }
+    } else if (arrayBlack.length == arrayWhite.length) {
+        // console.log("引き分け");
+        document.querySelector("#noticeBlack2").textContent = "引き分け";
+        document.querySelector("#noticeBlack3").textContent = "引き分け";
+        draw();
     } else {
     }
 }
 
 
-// ---PART.12---演出----------
+// ---STEP.13---演出----------------------------------------------------------------------
 
-// ---PART.12.1---youwin()
+// ---STEP.13.1---youwin()
 // youwin();
 function youwin() {
     document.querySelector("#main").style.backgroundImage = "url(/images/banpei_you.png)";
@@ -564,7 +564,7 @@ function youwin() {
     }
 }
 
-// ---PART.12.2---youlose()
+// ---STEP.13.2---youlose()
 // youlose();
 function youlose() {
     document.querySelector("#main").style.backgroundImage = "url(/images/banpei_wa.png)";
@@ -578,7 +578,7 @@ function youlose() {
     }
 }
 
-// ---PART.12.3---draw()
+// ---STEP.13.3---draw()
 // draw();
 function draw() {
 
@@ -588,8 +588,8 @@ function draw() {
 
 
 
-// ---PART.13---演出(arraySquare[i][k] を透明にしていく)----------
-// ---PART.13.1---arraySquare[][]配列全てを透明にしていく
+// ---STEP.14---演出(arraySquare[i][k] を透明にしていく)----------
+// ---STEP.14 part.1---arraySquare[][]配列全てを透明にしていく
 
 // squaresOpacity();
 // function squaresOpacity() {
@@ -617,11 +617,9 @@ function draw() {
 // }
 
 
-// // ---PART.13.2---arraySquare[][]配列で".black"だけを透明にしていく
+// ---STEP.14 part.2---arraySquare[][]配列で".black"だけを透明にしていく
 
-// // squaresOpacity2();
-// squaresOpacity();
-// function squaresOpacity() {
+// function squaresOpacity(".black") {
 function squaresOpacity(color) {
 
     console.log("透過する石の配列" + arrayRecord);
@@ -636,8 +634,7 @@ function squaresOpacity(color) {
     for (let i = 0; i < targeArray.length; i++) {
 
         let counter = 0;
-        console.log("ループに入りました" + targeArray.length);
-
+        console.log("ループに入りました" + targeArray.length + "回目");
 
         //          ここから↓が99回（counter > 99）100m秒毎に繰り返される
         const timerId = setInterval(
@@ -651,67 +648,21 @@ function squaresOpacity(color) {
                 }
             }
             , (10000 / targeArray.length))
-        //           ここまで↑が99回（counter > 99）100m秒毎に繰り返される
+        //           ここまで↑が(counter > targeArray.length)回、(10000 / targeArray.length)秒毎に繰り返される
+        //           targeArray.lengthの数値がいくらであろうと、10000ms(10秒)で終わる
     }
-
-    // ここまで↑が100回（i < 100）forループ
+    // ここまで↑が石の数だけ（i < targeArray.length）forループ
 }
 
 
-// // ---PART.13.2---arraySquare[][]配列全てを透明にしていく
-
-// // squaresOpacity2();
-// // squaresOpacity2(".black");
-//     const targeArray = document.querySelectorAll(".black");
-// console.log("透過する石の数" + targeArray.length);
-
-// function squaresOpacity2() {
-//     // function squaresOpacity2(color) {
-
-//     const targeArray = document.querySelectorAll(".black");
-//     // const targeArray = document.querySelectorAll(color);
-
-//     console.log("透過する石の数" + targeArray.length);
-
-//     // ここから↓が石の数だけ（i < targeArray.length）forループ
-//     for (let i = 0; i < targeArray.length; i++) {
-//         let counter = 0;
-
-//         //          ここから↓が99回（counter > 99）100m秒毎に繰り返される
-//         const timerId = setInterval(
-//             function () {
-//                 arraySquare2D[i][k].style.opacity = 1.0 - ((1 / targeArray.length) * counter);
-//                 counter++;
-//                 // console.log("カウンター" + counter);
-//                 if (counter > targeArray.length) {
-//                     clearInterval(timerId)
-//                     // console.log("clearIntervalが実行されました")
-//                 }
-//             }
-//             , (10000 / targeArray.length))
-//         //           ここまで↑が99回（counter > 99）100m秒毎に繰り返される
-//     }
-
-//     // ここまで↑が100回（i < 100）forループ
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-//---PART.14---演出----------
+//---PART.15---演出----------
 // 『headLine1』関数↓　　　.outerを["せ", "ん", "て", "ん", "す", "が"]ぐるぐる廻る;
 
 function headLine1(sentence) {
 
     const array = sentence;
+    const arrayBackColor = ["red", "pink", "aquamarine", "yellow", "powderblue"];
+    const arrayColor = ["yellow", "powderblue", "red", "pink", "aquamarine"];
     let counter = 0
 
     const timerId = setInterval(
@@ -719,12 +670,8 @@ function headLine1(sentence) {
 
             const i = (Math.floor(counter / 9)) % 4;
             const k = counter % 9;
-
             const m = counter % 7;
             const r = counter % 5;
-
-            const arrayBackColor = ["red", "pink", "aquamarine", "yellow", "powderblue"];
-            const arrayColor = ["yellow", "powderblue", "red", "pink", "aquamarine"];
 
             arrayOuter2D[i][k].style.opacity = 0.0 + (0.006 * counter);
             arrayOuter2D[i][k].textContent = array[m];
@@ -743,6 +690,71 @@ function headLine1(sentence) {
 
 
 
+
+// ---STEP.2.1 part-2  番兵さん。少し手打ち感を減らす（でも１次元配列）
+// // function outer() {
+// //     const arraySwirl = [];
+const arraySwirl = [];//周辺
+
+// swirl();
+function swirl() {
+    const count = 0;
+
+    for (let i = 0; i < 4; i++) {
+
+
+
+        for (let k = 0; k < 9 - (i * 2); k++) {
+
+
+
+            arraySwirl[0 + (count + count) + k] = arraySquare[(0 + (11 * i)) + (1 * k)];
+            arraySwirl[25 + k] = arraySquare[(9 + (9 * i)) + (10 * k)];
+            arraySwirl[50 + k] = arraySquare[(99 - (11 * i)) - (1 * k)];
+            arraySwirl[75 + k] = arraySquare[(90 - (9 * i)) - (10 * k)];
+        }
+        const count2 = 9 - (i * 2)
+    }
+    console.log(arraySwirl);
+
+    console.log(arraySwirl[0]);
+    console.log(arraySwirl[25]);
+    console.log(arraySwirl[50]);
+    console.log(arraySwirl[75]);
+
+
+
+
+    console.log(arraySwirl.length);
+    console.table(arraySwirl);
+}
+
+
+// function sideSider() {
+
+//     for (let i = 0; i < 4; i++) {
+//         for (let k = 0; k < 9 - (i * 2); k++) {
+//             arrayTop.push(arraySquare[(0 + i)][(0 + i) + (1 * k)]);
+//             arrayRight.push(arraySquare[(0 + i) + (1 * k)][9 - i]);
+//             arrayBottom.push(arraySquare[(9 - i)][(9 - i) - (1 * k)]);
+//             arrayLeft.push(arraySquare[(9 - i) - (1 * k)][(0 + i)]);
+//         }
+
+//         c.push(arrayTop);
+//         array2D.push(arrayRight);
+//         array2D.push(arrayBottom);
+//         array2D.push(arrayLeft);
+
+//     }
+
+//     console.table(array2D[0].length);
+
+
+//     for (let i = 0; i < 4; i++) {
+//         console.log(array2D[i]);
+//         // console.table(array2D);
+//     }
+// }
 
 
 
