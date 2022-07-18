@@ -158,6 +158,20 @@ arraySquare2D[5][4].classList.remove("inner");
 arraySquare2D[5][5].classList.remove("inner");
 
 
+// arrayRecord2D[1][5] = "b";
+// arrayRecord2D[1][4] = "b";
+// arrayRecord2D[2][5] = "b";
+// arrayRecord2D[2][4] = "b";
+// arrayRecord2D[3][5] = "b";
+// arrayRecord2D[3][4] = "b";
+// arrayRecord2D[6][5] = "b";
+// arrayRecord2D[6][4] = "b";
+// arrayRecord2D[7][5] = "b";
+// arrayRecord2D[7][4] = "b";
+// arrayRecord2D[8][5] = "b";
+// arrayRecord2D[8][4] = "b";
+
+
 
 // // ---PART.5  全てのはじまり
 
@@ -168,6 +182,11 @@ window.onload = function () {
     ableCheck("b", "w"); // PART.7-2   先手の黒石が置ける場所を探す
 
     putStone();       // PART.8
+
+    // squaresOpacity();
+    // squaresOpacity(".black");
+    // squaresOpacity(".white");
+
 }
 
 
@@ -522,21 +541,6 @@ function flipStone(i, k, vertical, horizontal, own, opponent, count) {
 // // ---PART.10---パスする----------
 // // 石を置く場所がない場合はパスになる
 
-// const ArrayPass = document.querySelectorAll(".able");
-// if (ArrayPass.length == 0) {
-//     count = count + 1;
-//     ableCheck("b", "w");
-//     const ArrayPass = document.querySelectorAll(".able");
-//     if (ArrayPass.length != 0) {
-//         document.querySelector("#noticeBlack1").style.border = "15px dashed black"
-//         document.querySelector("#noticeBlack4").style.border = "0px dashed black"
-//     } else if (ArrayPass.length == 0) {
-//         checkWin();
-//     } else {
-//         console.log("bagかな???");
-//     }
-// }
-
 function checkPass(count) {
 
     const ArrayPass = document.querySelectorAll(".able");
@@ -549,6 +553,8 @@ function checkPass(count) {
             document.querySelector("#noticeBlack3").textContent = "白の置くところがありません。パスになります。";
             document.querySelector("#noticeBlack1").style.border = "15px dashed black";
             document.querySelector("#noticeBlack4").style.border = "0px dashed white";
+
+
             // console.log("黒が置ける場所を探す")
             ableCheck("b", "w");
             const ArrayPass = document.querySelectorAll(".able");
@@ -638,67 +644,155 @@ function checkWin() {
 // ---PART.12.1---youwin()
 // youwin();
 function youwin() {
-    squaresOpacity();
+    document.querySelector("#main").style.backgroundImage = "url(/images/banpei_you.png)";
 
-    setTimeout(function () {
-        document.querySelector("#main").innertxte = "勝";
-    }, 9000);
+    squaresOpacity(".black");
 
     setTimeout(youwin2, 10000);
 
     function youwin2() {
         headLine1(["あ", "な", "た", "の", "か", "ち", ""]);
-        console.log("headLine1が実行されるはず");
     }
-
 }
 
 // ---PART.12.2---youlose()
 // youlose();
 function youlose() {
-    squaresOpacity();
+    document.querySelector("#main").style.backgroundImage = "url(/images/banpei_wa.png)";
+
+    squaresOpacity(".white");
 
     setTimeout(youlose2, 10000);
 
     function youlose2() {
-        headLine2(["あ", "な", "た", "の", "ま", "け", ""]);
+        headLine1(["あ", "な", "た", "の", "ま", "け", ""]);
     }
-
 }
 
 // ---PART.12.3---draw()
 // draw();
 function draw() {
-    squaresOpacity();
-    document.querySelector("#main").textContent = "引き分け";
+
+    squaresOpacity(".square");
+
 }
 
 
 
-// ---PART.13---演出(arraySquare[i] を透明にしていく)----------
+// ---PART.13---演出(arraySquare[i][k] を透明にしていく)----------
+// ---PART.13.1---arraySquare[][]配列全てを透明にしていく
 
 // squaresOpacity();
-function squaresOpacity() {
-    // ここから↓が100回（i < 100）forループ
-    for (let i = 0; i < 100; i++) {
+// function squaresOpacity() {
+//     // ここから↓が100回（i < 100）forループ
+//     for (let i = 0; i < 10; i++) {
+//         for (let k = 0; k < 10; k++) {
+//             let counter = 0;
+
+//             //          ここから↓が99回（counter > 99）100m秒毎に繰り返される
+//             const timerId = setInterval(
+//                 function () {
+//                     arraySquare2D[i][k].style.opacity = 1.0 - (0.01 * counter);
+//                     counter++;
+//                     // console.log("カウンター" + counter);
+//                     if (counter > 99) {
+//                         clearInterval(timerId)
+//                         // console.log("clearIntervalが実行されました")
+//                     }
+//                 }
+//                 , 100)
+//             //           ここまで↑が99回（counter > 99）100m秒毎に繰り返される
+//         }
+//     }
+//     // ここまで↑が100回（i < 100）forループ
+// }
+
+
+// // ---PART.13.2---arraySquare[][]配列で".black"だけを透明にしていく
+
+// // squaresOpacity2();
+// squaresOpacity();
+// function squaresOpacity() {
+function squaresOpacity(color) {
+
+    console.log("透過する石の配列" + arrayRecord);
+    const targeArray = document.querySelectorAll(color);
+    console.log("透過する石の配列" + targeArray);
+    // console.log("透過する石の配列" + targeArray[0].textContent);
+    console.log("透過する石の数" + targeArray.length);
+
+    // const targeArray = document.querySelectorAll(color);
+
+    // ここから↓が石の数だけ（i < targeArray.length）forループ
+    for (let i = 0; i < targeArray.length; i++) {
+
         let counter = 0;
+        console.log("ループに入りました" + targeArray.length);
+
 
         //          ここから↓が99回（counter > 99）100m秒毎に繰り返される
         const timerId = setInterval(
             function () {
-                arraySquare[i].style.opacity = 1.0 - (0.01 * counter);
+                targeArray[i].style.opacity = 1.0 - ((1 / targeArray.length) * counter);
                 counter++;
-                console.log("カウンター" + counter);
-                if (counter > 99) {
+                // console.log("カウンター" + counter);
+                if (counter > targeArray.length) {
                     clearInterval(timerId)
                     console.log("clearIntervalが実行されました")
                 }
             }
-            , 100)
+            , (10000 / targeArray.length))
         //           ここまで↑が99回（counter > 99）100m秒毎に繰り返される
     }
+
     // ここまで↑が100回（i < 100）forループ
 }
+
+
+// // ---PART.13.2---arraySquare[][]配列全てを透明にしていく
+
+// // squaresOpacity2();
+// // squaresOpacity2(".black");
+//     const targeArray = document.querySelectorAll(".black");
+// console.log("透過する石の数" + targeArray.length);
+
+// function squaresOpacity2() {
+//     // function squaresOpacity2(color) {
+
+//     const targeArray = document.querySelectorAll(".black");
+//     // const targeArray = document.querySelectorAll(color);
+
+//     console.log("透過する石の数" + targeArray.length);
+
+//     // ここから↓が石の数だけ（i < targeArray.length）forループ
+//     for (let i = 0; i < targeArray.length; i++) {
+//         let counter = 0;
+
+//         //          ここから↓が99回（counter > 99）100m秒毎に繰り返される
+//         const timerId = setInterval(
+//             function () {
+//                 arraySquare2D[i][k].style.opacity = 1.0 - ((1 / targeArray.length) * counter);
+//                 counter++;
+//                 // console.log("カウンター" + counter);
+//                 if (counter > targeArray.length) {
+//                     clearInterval(timerId)
+//                     // console.log("clearIntervalが実行されました")
+//                 }
+//             }
+//             , (10000 / targeArray.length))
+//         //           ここまで↑が99回（counter > 99）100m秒毎に繰り返される
+//     }
+
+//     // ここまで↑が100回（i < 100）forループ
+// }
+
+
+
+
+
+
+
+
 
 
 
@@ -706,33 +800,34 @@ function squaresOpacity() {
 //---PART.14---演出----------
 // 『headLine1』関数↓　　　.outerを["せ", "ん", "て", "ん", "す", "が"]ぐるぐる廻る;
 
-function headLine2(sentence) {
+function headLine1(sentence) {
 
     const array = sentence;
     let counter = 0
 
     const timerId = setInterval(
         function () {
-            // for (let i = 0; i < 5 * 36; i++) {
-            const k = counter % 36;
+
+            const i = (Math.floor(counter / 9)) % 4;
+            const k = counter % 9;
+
             const m = counter % 7;
             const r = counter % 5;
 
             const arrayBackColor = ["red", "pink", "aquamarine", "yellow", "powderblue"];
             const arrayColor = ["yellow", "powderblue", "red", "pink", "aquamarine"];
 
-            arraySquare[arrayOuterIndex[k]].style.opacity = 0.0 + (0.006 * counter);
-            arraySquare[arrayOuterIndex[k]].textContent = array[m];
-            arraySquare[arrayOuterIndex[k]].style.backgroundColor = arrayBackColor[r];
-            arraySquare[arrayOuterIndex[k]].style.color = arrayColor[r];
+            arrayOuter2D[i][k].style.opacity = 0.0 + (0.006 * counter);
+            arrayOuter2D[i][k].textContent = array[m];
+            arrayOuter2D[i][k].style.backgroundColor = arrayBackColor[r];
+            arrayOuter2D[i][k].style.color = arrayColor[r];
 
-            // console.log("カウンター" + counter);
+            console.log("カウンター" + counter);
             counter++;
 
             if (counter > 180) {
                 clearInterval(timerId)
             }
-            // }
         }, 150)
 }
 
@@ -744,9 +839,8 @@ function headLine2(sentence) {
 
 
 
-
-// // headLine1();
-// function headLine1() {
+// // headLine2();
+// function headLine2() {
 
 
 //     document.querySelector("#contents").style.height = "0px";
@@ -823,9 +917,4 @@ function headLine2(sentence) {
 // // for (let i = 0; i < 15; i++) {
 // //     console.log("列目の" + arrayUpperRight[i]);
 // // }
-
-
-
-
-
 
