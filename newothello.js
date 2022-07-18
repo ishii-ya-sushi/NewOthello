@@ -143,8 +143,6 @@ window.onload = function () {
     ableCheck("b", "w"); // SREP.7-2   先手の黒石が置ける場所を探す
     putStone();       // SREP.8
 
-    swirl();
-
 }
 
 
