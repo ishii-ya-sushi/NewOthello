@@ -71,7 +71,10 @@ footer {
     text-align: center;
     background-image: url(/images/banpei_uk.png);
     /* background-size:70% auto;; */
-    background-size:370px auto;;
+    /* background-size:370px auto; */
+
+    background-size:contain;
+    /* background-size:cover;   */
     background-position:center;
     /* background-repeat:repeat-x; */
 
@@ -82,7 +85,6 @@ footer {
     position: absolute;
     top: -5px;
     /* right: 0px; */
-
 }
 
 #board {

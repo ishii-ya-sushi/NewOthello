@@ -262,7 +262,7 @@ function putStone() {
         for (let k = 0; k < 10; k++) {
 
             arraySquare2D[i][k].addEventListener('click', function () {
-                
+
                 notice(count);
 
                 console.log("index[" + i + "][" + k + "]にクリックされました")
@@ -279,6 +279,29 @@ function putStone() {
 
                     // ブラウザ上の表示を書き換える（記録用配列に沿って）
                     drawing();
+
+
+                    // ---------------------------------------------------------------------------------------------------------
+
+                    document.querySelector("#main").style.backgroundImage = "url(/images/banpei_you.png)";
+                    const targeArrayB = document.querySelectorAll(".black");
+                    const targeArrayW = document.querySelectorAll(".white");
+                    for (let i = 0; i < targeArrayB.length; i++) {
+
+                        // console.log(targeArrayB.length + "回目");
+                        targeArrayB[i].style.opacity = 0.30;
+                        // console.log("カウンター" + counter);
+                    }
+                    for (let i = 0; i < targeArrayW.length; i++) {
+                        // console.log(targeArrayW.length + "回目");
+                        targeArrayW[i].style.opacity = 1.0;
+                        // console.log("カウンター" + counter);
+                    }
+
+
+                    // ---------------------------------------------------------------------------------------------------------
+
+
 
                     // 後手（白軍）が置くことが可能なマスを調べる
                     ableCheck("w", "b");
@@ -308,6 +331,29 @@ function putStone() {
                     checkFlip(i, k, "w", "b");
 
                     drawing();
+
+
+
+                    // ---------------------------------------------------------------------------------------------------------
+
+                    document.querySelector("#main").style.backgroundImage = "url(/images/banpei_wa.png)";
+
+                    const targeArrayB = document.querySelectorAll(".black");
+                    const targeArrayW = document.querySelectorAll(".white");
+                    for (let i = 0; i < targeArrayB.length; i++) {
+                        console.log(targeArrayB.length + "回目");
+                        targeArrayB[i].style.opacity = 1.0;
+                        // console.log("カウンター" + counter);
+                    }
+                    for (let i = 0; i < targeArrayW.length; i++) {
+                        console.log(targeArrayW.length + "回目");
+                        targeArrayW[i].style.opacity = 0.30;
+                        // console.log("カウンター" + counter);
+                    }
+
+                    // ---------------------------------------------------------------------------------------------------------
+
+
 
                     // 先手（黒石）が置くことが可能なマスを調べる
                     ableCheck("b", "w");
