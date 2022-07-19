@@ -667,10 +667,8 @@ function draw() {
 // function squaresOpacity(".black") {
 function squaresOpacity(color) {
 
-    console.log("透過する石の配列" + arrayRecord);
     const targeArray = document.querySelectorAll(color);
     console.log("透過する石の配列" + targeArray);
-    // console.log("透過する石の配列" + targeArray[0].textContent);
     console.log("透過する石の数" + targeArray.length);
 
     // const targeArray = document.querySelectorAll(color);
