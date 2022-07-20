@@ -141,9 +141,9 @@ arrayRecord2D[5][5] = "w";
 
 window.onload = function () {
 
-    drawing();    // SREP.6
-    ableCheck("b", "w"); // SREP.7-2   先手の黒石が置ける場所を探す
-    putStone();       // SREP.8
+    drawing();    // STEP.6
+    ableCheck("b", "w"); // STEP.7-2   先手の黒石が置ける場所を探す
+    putStone();       // STEP.8
 
 }
 
@@ -257,8 +257,9 @@ function checkLine(i, k, vertical, horizontal, own, opponent, count) {
 //    同じ場所には２度クリックできない。
 // putStone();
 function putStone() {
-    let count = 0;
-    const passCount = 0;
+    let count = 0;   // クリックのカウント
+    const passCount = 0; // パスをカウント
+
     for (let i = 0; i < 10; i++) {
         for (let k = 0; k < 10; k++) {
 
@@ -266,7 +267,7 @@ function putStone() {
                 console.log("index[" + i + "][" + k + "]にクリックされました")
 
                 notice(count);
-                // console.log("得点表を更新する");
+                // console.log("得点表を更新");
 
                 // お知らせを消す
                 document.querySelector("#noticeBlack2").textContent = "";
@@ -618,9 +619,6 @@ function draw() {
 //     }
 //     // ここまで↑が100回（i < 100）forループ
 // }
-
-
-
 
 
 
