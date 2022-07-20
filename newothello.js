@@ -636,7 +636,7 @@ function gameOpacity(ownClass, opponentClass, image) {
     const targeArrayOpponent = document.querySelectorAll(opponentClass);
     for (let i = 0; i < targeArrayOwn.length; i++) {
         console.log(targeArrayOwn.length + "回目");
-        targeArrayOwn[i].style.opacity = 0.30;
+        targeArrayOwn[i].style.opacity = 0.60;
         // console.log("カウンター" + counter);
     }
     for (let i = 0; i < targeArrayOpponent.length; i++) {
