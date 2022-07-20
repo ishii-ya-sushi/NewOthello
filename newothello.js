@@ -283,21 +283,22 @@ function putStone() {
 
                     // ---------------------------------------------------------------------------------------------------------
 
-                    document.querySelector("#main").style.backgroundImage = "url(/images/banpei_you.png)";
-                    const targeArrayB = document.querySelectorAll(".black");
-                    const targeArrayW = document.querySelectorAll(".white");
-                    for (let i = 0; i < targeArrayB.length; i++) {
+                    gameOpacity(".black", ".white", "url(/images/banpei_you.png)")
 
-                        // console.log(targeArrayB.length + "回目");
-                        targeArrayB[i].style.opacity = 0.30;
-                        // console.log("カウンター" + counter);
-                    }
-                    for (let i = 0; i < targeArrayW.length; i++) {
-                        // console.log(targeArrayW.length + "回目");
-                        targeArrayW[i].style.opacity = 1.0;
-                        // console.log("カウンター" + counter);
-                    }
+                    // document.querySelector("#main").style.backgroundImage = "url(/images/banpei_you.png)";
+                    // const targeArrayB = document.querySelectorAll(".black");
+                    // const targeArrayW = document.querySelectorAll(".white");
+                    // for (let i = 0; i < targeArrayB.length; i++) {
 
+                    //     // console.log(targeArrayB.length + "回目");
+                    //     targeArrayB[i].style.opacity = 0.30;
+                    //     // console.log("カウンター" + counter);
+                    // }
+                    // for (let i = 0; i < targeArrayW.length; i++) {
+                    //     // console.log(targeArrayW.length + "回目");
+                    //     targeArrayW[i].style.opacity = 1.0;
+                    //     // console.log("カウンター" + counter);
+                    // }
 
                     // ---------------------------------------------------------------------------------------------------------
 
@@ -336,20 +337,22 @@ function putStone() {
 
                     // ---------------------------------------------------------------------------------------------------------
 
-                    document.querySelector("#main").style.backgroundImage = "url(/images/banpei_wa.png)";
+                    gameOpacity(".white", ".black", "url(/images/banpei_uk.png)")
 
-                    const targeArrayB = document.querySelectorAll(".black");
-                    const targeArrayW = document.querySelectorAll(".white");
-                    for (let i = 0; i < targeArrayB.length; i++) {
-                        console.log(targeArrayB.length + "回目");
-                        targeArrayB[i].style.opacity = 1.0;
-                        // console.log("カウンター" + counter);
-                    }
-                    for (let i = 0; i < targeArrayW.length; i++) {
-                        console.log(targeArrayW.length + "回目");
-                        targeArrayW[i].style.opacity = 0.30;
-                        // console.log("カウンター" + counter);
-                    }
+                    // document.querySelector("#main").style.backgroundImage = "url(/images/banpei_wa.png)";
+
+                    // const targeArrayB = document.querySelectorAll(".black");
+                    // const targeArrayW = document.querySelectorAll(".white");
+                    // for (let i = 0; i < targeArrayB.length; i++) {
+                    //     console.log(targeArrayB.length + "回目");
+                    //     targeArrayB[i].style.opacity = 1.0;
+                    //     // console.log("カウンター" + counter);
+                    // }
+                    // for (let i = 0; i < targeArrayW.length; i++) {
+                    //     console.log(targeArrayW.length + "回目");
+                    //     targeArrayW[i].style.opacity = 0.30;
+                    //     // console.log("カウンター" + counter);
+                    // }
 
                     // ---------------------------------------------------------------------------------------------------------
 
@@ -570,6 +573,11 @@ function checkPass(count) {
 //    先手後手（または後手先手）と連続して石が置けるところがなかった場合
 
 function checkWin() {
+
+    for (let i = 0; i < 100; i++) {
+        arraySquare[i].style.opacity = 1.0;
+    }
+
     // const arrayAble = document.querySelectorAll(".able");
     const arrayBlack = document.querySelectorAll(".black");
     const arrayWhite = document.querySelectorAll(".white");
@@ -605,7 +613,7 @@ function youwin() {
     setTimeout(youwin2, 10000);
 
     function youwin2() {
-        headLine1(["あ", "な", "た", "の", "か", "ち", ""]);
+        headLine1(["黒", "の", "か", "ち", "で", "す", ""]);
     }
 }
 
@@ -619,7 +627,7 @@ function youlose() {
     setTimeout(youlose2, 10000);
 
     function youlose2() {
-        headLine1(["あ", "な", "た", "の", "ま", "け", ""]);
+        headLine1(["白", "の", "か", "ち", "で", "す", ""]);
     }
 }
 
@@ -662,7 +670,42 @@ function draw() {
 // }
 
 
-// ---STEP.14 part.2---arraySquare[][]配列で".black"だけを透明にしていく
+
+
+
+
+// ---STEP.14 part.2---ゲーム中に相手側の石を透過する----------
+
+// gameOpacity(".black",".white","url(/images/banpei_you.png)")
+
+function gameOpacity(ownClass, opponentClass, image) {
+
+    document.querySelector("#main").style.backgroundImage = image;
+
+    const targeArrayOwn = document.querySelectorAll(ownClass);
+    const targeArrayOpponent = document.querySelectorAll(opponentClass);
+    for (let i = 0; i < targeArrayOwn.length; i++) {
+        console.log(targeArrayOwn.length + "回目");
+        targeArrayOwn[i].style.opacity = 0.30;
+        // console.log("カウンター" + counter);
+    }
+    for (let i = 0; i < targeArrayOpponent.length; i++) {
+        console.log(targeArrayOpponent.length + "回目");
+        targeArrayOpponent[i].style.opacity = 1.0;
+        // console.log("カウンター" + counter);
+    }
+}
+// ---------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+// ---STEP.14 part.3---arraySquare[][]配列で".black"だけを透明にしていく
 
 // function squaresOpacity(".black") {
 function squaresOpacity(color) {
@@ -696,6 +739,22 @@ function squaresOpacity(color) {
     }
     // ここまで↑が石の数だけ（i < targeArray.length）forループ
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //---PART.15---演出----------
