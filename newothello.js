@@ -283,32 +283,38 @@ function putStone() {
                     // ブラウザ上の表示を書き換える（記録用配列に沿って）
                     drawing();
 
-                    // ゲーム中に相手側の石を透過する（背景画像も変える）
+                    // ここまで↑はクリックしたことに対する処理-----------------------------------------
+                    // ここから↓は次にクリックするための（までの）処理---------------------------------
+
+                    // （白（後手）がクリックするまでの間）黒（先手）の石を透過する（背景画像も変える）
                     gameOpacity(".black", ".white", "url(/images/banpei_uk.png)")
 
-                    // 後手（白軍）が置くことが可能なマスを調べる
+                    // 白（後手）が置くことが可能なマスを調べる
                     ableCheck("w", "b");
 
-                    // もし後手（白軍）の置くところがなければパスする
-                    // クリックの count を『+1』する
+                    // 白（後手）がパスするか調べる。白がパスしたなら『1』がリターンされる。
                     const passCount = checkPass(count);
                     if (passCount == 1) {
-                        // console.log("後手（白軍）の置くところがなかったので『1』がリターンされた");
+                        // console.log("白（後手）がパスしたので『1』がリターンされてきた");
+                        // 背景画像を戻す
+                        gameOpacity(".white", ".black", "url(/images/banpei_wa.png)")
+                        // 黒（先手）が置くことが可能なマスを調べる
+                        ableCheck("b", "w");
 
                         const ArrayPass = document.querySelectorAll(".able");
-                        // 先手（黒軍）が置くことが可能なマス も 調べる
                         if (ArrayPass.length == 0) {
-                            // console.log("先手（黒軍） も 置くところがなかった。");
-                            // console.log("ので、試合終了");
+                            // console.log("黒（先手） も 置くところがなかった。");
+                            // console.log("白と黒とが連続してパスしたので、試合終了");
                             // 勝負判定に
                             checkWin();
                         } else {
+                            // count = count + passCount;
                         }
                     }
+                    // クリックの count を『+1』する
                     // console.log(count + "に" + passCount + "を加える");
                     count = count + passCount;
                     // console.log("カウントは" + count + "になった");
-
                 } else {
                     // --- 白石（"w", "b"）にひっくり返す
                     checkFlip(i, k, "w", "b");
@@ -317,18 +323,20 @@ function putStone() {
 
                     gameOpacity(".white", ".black", "url(/images/banpei_wa.png)")
 
-                    // 先手（黒石）が置くことが可能なマスを調べる
                     ableCheck("b", "w");
-
+                    // console.log("黒（先手）が置くことが可能なマスを調べる")
                     const passCount = checkPass(count);
                     if (passCount == 1) {
-                        // console.log("後手（黒軍）の置くところがなかったので『1』がリターンされた");
+                        // console.log("黒（先手）がパスしたので『1』がリターンされてきた");
+
+                        gameOpacity(".black", ".white", "url(/images/banpei_uk.png)")
+                        // 白（後手）が置くことが可能なマスを調べる
+                        ableCheck("w", "b");
 
                         const ArrayPass = document.querySelectorAll(".able");
-                        // 後手（白軍）が置くことが可能なマス も 調べる
                         if (ArrayPass.length == 0) {
-                            // console.log("後手（白軍） も 置くところがなかった。");
-                            // console.log("ので、試合終了");
+                            // console.log("白（後手） も 置くところがなかった。");
+                            // console.log("黒と白とが連続してパスしたので、試合終了");
                             // 勝負判定に
                             checkWin();
                         } else {
@@ -483,33 +491,37 @@ function checkPass(count) {
             document.querySelector("#noticeBlack3").textContent = "白の置くところがありません。パスになります。";
             document.querySelector("#noticeBlack1").style.border = "15px dashed black";
             document.querySelector("#noticeBlack4").style.border = "0px dashed white";
-            // 自軍の石が置ける場所を探す
-            // console.log("黒が置ける場所を探す")
-            ableCheck("b", "w");
-            const ArrayPass = document.querySelectorAll(".able");
-            if (ArrayPass.length != 0) {
-                console.log("黒の置くところはある！！！(ArrayPass.length != 0)");
-            } else if (ArrayPass.length == 0) {
-                console.log("黒の置くところもない！！！(ArrayPass.length == 0)");
-                checkWin();
-            } else {
-                console.log("bugかな???");
-            }
+
+            // gameOpacity(".white", ".black", "url(/images/banpei_wa.png)")
+            // // 自軍の石が置ける場所を探す
+            // // console.log("黒が置ける場所を探す")
+            // ableCheck("b", "w");
+            // const ArrayPass = document.querySelectorAll(".able");
+            // if (ArrayPass.length != 0) {
+            //     console.log("黒の置くところはある！！！(ArrayPass.length != 0)");
+            // } else if (ArrayPass.length == 0) {
+            //     console.log("黒の置くところもない！！！(ArrayPass.length == 0)");
+            //     checkWin();
+            // } else {
+            //     console.log("bugかな???");
+            // }
         } else {
             document.querySelector("#noticeBlack2").textContent = "黒の置くところがありません。パスになります。";
             document.querySelector("#noticeBlack1").style.border = "0px dashed black";
             document.querySelector("#noticeBlack4").style.border = "15px dashed white";
-            // console.log("白が置ける場所を探す")
-            ableCheck("w", "b");
-            const ArrayPass = document.querySelectorAll(".able");
-            if (ArrayPass.length != 0) {
-                console.log("白の置くところはある！！！(ArrayPass.length != 0)");
-            } else if (ArrayPass.length == 0) {
-                console.log("白の置くところもない！！！(ArrayPass.length == 0)");
-                checkWin();
-            } else {
-                console.log("bugかな???");
-            }
+
+            // gameOpacity(".black", ".white", "url(/images/banpei_uk.png)")
+            // // console.log("白が置ける場所を探す")
+            // ableCheck("w", "b");
+            // const ArrayPass = document.querySelectorAll(".able");
+            // if (ArrayPass.length != 0) {
+            //     console.log("白の置くところはある！！！(ArrayPass.length != 0)");
+            // } else if (ArrayPass.length == 0) {
+            //     console.log("白の置くところもない！！！(ArrayPass.length == 0)");
+            //     checkWin();
+            // } else {
+            //     console.log("bugかな???");
+            // }
         }
         console.log("『+1』をリターンする");
         return 1;
