@@ -266,9 +266,6 @@ function putStone() {
             arraySquare2D[i][k].addEventListener('click', function () {
                 console.log("index[" + i + "][" + k + "]にクリックされました")
 
-                notice(count);
-                // console.log("得点表を更新");
-
                 // お知らせを消す
                 document.querySelector("#noticeBlack2").textContent = "";
                 document.querySelector("#noticeBlack3").textContent = "";
@@ -283,8 +280,8 @@ function putStone() {
                     // ブラウザ上の表示を書き換える（記録用配列に沿って）
                     drawing();
 
-                    // ここまで↑はクリックしたことに対する処理-----------------------------------------
-                    // ここから↓は次にクリックするための（までの）処理---------------------------------
+                    // ------------  ここまで↑はクリックしたことに対する処理  --------------------
+                    // ------------  ここから↓は次にクリックするための（までの）処理  -------------
 
                     // （白（後手）がクリックするまでの間）黒（先手）の石を透過する（背景画像も変える）
                     gameOpacity(".black", ".white", "url(/images/banpei_uk.png)")
@@ -305,7 +302,7 @@ function putStone() {
                         if (ArrayPass.length == 0) {
                             // console.log("黒（先手） も 置くところがなかった。");
                             // console.log("白と黒とが連続してパスしたので、試合終了");
-                            // 勝負判定に
+                            // 勝敗の判定に
                             checkWin();
                         } else {
                             // count = count + passCount;
@@ -337,7 +334,7 @@ function putStone() {
                         if (ArrayPass.length == 0) {
                             // console.log("白（後手） も 置くところがなかった。");
                             // console.log("黒と白とが連続してパスしたので、試合終了");
-                            // 勝負判定に
+                            // 勝敗の判定に
                             checkWin();
                         } else {
                         }
@@ -345,6 +342,10 @@ function putStone() {
                     // 相手がパスしていたら、クリックcount にリターンされたpassCountの『1』が加わる。
                     count = count + passCount;
                 }
+
+                notice(count);
+                // console.log("得点表を更新");
+
                 count = count + 1;
                 console.log("クリックのカウントは" + count);
             })
@@ -384,10 +385,10 @@ function putStone() {
 
 
 
-// ---STEP.9-2 黒石（"b", "w"）に、白石（"w", "b"）にひっくり返す
+// ---STEP.9-1 黒石（"b", "w"）に、白石（"w", "b"）にひっくり返す
 
 function checkFlip(i, k, own, opponent) {
-    // どの方向の白石が黒色挟まれてひっくり返せるか確認する
+    // どの方向が自軍の色に挟まれてひっくり返せるか確認する準備
     // 引数  (i, k, vertical, horizontal, own, opponent, count)
     // （水平方向のチェック）
     flipStone(i, k, 0, +1, own, opponent, 1); // 右方向へ
@@ -402,7 +403,7 @@ function checkFlip(i, k, own, opponent) {
     flipStone(i, k, +1, -1, own, opponent, 1); // 左下方向
     flipStone(i, k, -1, +1, own, opponent, 1); // 右上方向
 
-    // 記録用配列に、"自軍の色を" を記入する
+    // 記録用配列に、"自軍の色" を記入する
     arrayRecord2D[i][k] = own;
 }
 
