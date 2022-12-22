@@ -5,20 +5,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="newothello.css">
+
+    <link rel="stylesheet" href="/css/othello_Lv5.css">
+    <link rel="stylesheet" href="/css/fuwafuwa.css">
+
+    <!-- CreateJSのライブラリー読み込み -->
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <!-- ParticleJSのライブラリー読み込み -->
+    <script src="https://cdn.rawgit.com/ics-creative/ParticleJS/release/1.0.0/libs/particlejs.min.js"></script>
+
+
     <title>【原本】オセロ</title>
 </head>
 
 <body>
     <header id="top">
-        オ　セ　ロ　＆　HTML　CSS　JAVASCRIPT
+        リ バ ー ス & POST to POST de
     </header>
 
-    <div id="blueSide">
-        <div id="noticeBlack1">なにか</div>
-        <div id="noticeBlack2">あるか</div>
-        <div id="noticeBlack3">あると</div>
-        <div id="noticeBlack4">いいな</div>
+    <div id="blackNotice">
+        <div class="info" id="noticeBlack1">なにか</div>
+        <div class="info" id="noticeBlack2">あるか</div>
+        <div class="info" id="noticeBlack3"></div>
+        <div class="info" id="noticeBlack4">あると</div>
+        <div class="info" id="noticeBlack5">いいな</div>
+    </div>
+    <div id="blackScore">
+        <div class="info" id="scoreBlack1"></div>
+        <div class="info" id="scoreBlack2"></div>
+        <div class="info" id="scoreBlack3"></div>
+        <div class="info" id="scoreBlack4"></div>
+        <div class="info" id="scoreBlack5"></div>
+    </div>
+
+
+    <div id="canvas">
+
+        <canvas width="1280" height="720" id="myCanvas"></canvas>
+
+        <!-- <div id="myBoard"> -->
+        <div id="board">
+            <!-- <div>を100個作る -->
+        </div>
+
+
     </div>
 
     <div id="contents">
@@ -26,26 +56,65 @@
         <div id="sub1">備考
             <div id="commentary1">備考</div>
         </div>
-        <div id="main">
-            <div id="board">
-                <!-- <div>を100個作る -->
-            </div>
-        </div>
+        <!-- <div id="main"> -->
+        <!-- <div id="board"> -->
+        <!-- <div>を100個作る -->
+        <!-- </div> -->
+        <!-- </div> -->
         <div id="sub2">備考
             <div id="commentary2">備考</div>
         </div>
     </div>
-    <div id="redSide">
-        <div id="noticeWhite1">なにか</div>
-        <div id="noticeWhite2">あるか</div>
-        <div id="noticeWhite3">あると</div>
-        <div id="noticeWhite4">いいな</div>
+    <div id="whiteScore">
+        <div class="info" id="scoreWhite1">なにか</div>
+        <div class="info" id="scoreWhite2">あるか</div>
+        <div class="info" id="scoreWhite3"></div>
+        <div class="info" id="scoreWhite4">あると</div>
+        <div class="info" id="scoreWhite5">いいな</div>
+    </div>
+    <div id="whiteNotice">
+        <div class="info" id="noticeWhite1">なにか</div>
+        <div class="info" id="noticeWhite2">あるか</div>
+        <div class="info" id="noticewhite3"></div>
+        <div class="info" id="noticeWhite4">あると</div>
+        <div class="info" id="noticeWhite5">いいな</div>
     </div>
     <footer id="bottom">
-        オ　セ　ロ　＆　HTML　CSS　JAVASCRIPT
+        リ バ ー ス & POST to POST de
     </footer>
 
-    <script src="newothello.js"></script>
+
+
+
+
+    <script src="effect_Lv5.js"></script>
+
+    <script src="/js/particle_Lv5.js"></script>
+    <script src="/js/particleD_Lv5.js"></script>
+    <script src="/js/particleEtc_Lv5.js"></script>
+
+    <script src="/js/p_start.js"></script>
+    <script src="/js/p_bubble.js"></script>
+
+
+
+    <script src="/js/p_commetL.js"></script>
+    <script src="/js/p_fireBall.js"></script>
+    <script src="/js/p_fireWall.js"></script>
+    <script src="/js/p_circle.js"></script>
+
+    
+
+
+    <script src="othello_Lv5.js"></script>
+    <script src="directed_Lv5.js"></script>
+    <script src="man_Lv5.js"></script>
+    <script src="pcMan_Lv5.js"></script>
+    <script src="pc_Lv5.js"></script>
+    <script src="greyMatter_Lv5.js"></script>
+
+
+
 
 </body>
 
