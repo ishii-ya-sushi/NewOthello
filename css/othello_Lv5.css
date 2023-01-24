@@ -6,6 +6,9 @@ body {
     /* background-color: transparent; */
     /* background-color: rgba(0, 0, 0, 0.3); */
     /* opacity: 0.5; */
+
+    /* font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif; */
+
 }
 
 header,
@@ -259,7 +262,10 @@ footer {
     color: darkgreen;
     /* color: orangered;
     background-color: rgb(141, 110, 216); */
-    font-size: 50px;
+    /* font-size: 50px; */
+    font-size: 20px;
+
+
     pointer-events: auto;
     cursor: pointer;
 }

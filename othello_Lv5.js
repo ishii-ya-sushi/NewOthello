@@ -1,7 +1,3 @@
-// let window_obj = window;
-// console.log(window_obj);
-// window_obj.setOpacity(0.5);
-
 
 // ---STEP.0   HTML の 要素を作る----------------------------------------
 //             マス（square） 100個分の "<div>" "<p>" "<img>"を作る-------

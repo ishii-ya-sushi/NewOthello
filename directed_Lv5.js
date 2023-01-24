@@ -237,7 +237,7 @@ function checkWin() {
 
     // --------------------------------リロード 無限繰り返し------------------------------------------------
     const jugem = location.reload();
-    setTimeout(jugem, 13000);
+    setTimeout(jugem, 17000);
 
 
 }
