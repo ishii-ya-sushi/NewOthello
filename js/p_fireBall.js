@@ -59,14 +59,14 @@ function handleTick_fireBall() {
   // particleSystem.height = 720,
   // particleSystem.emitFrequency = 300, // 1秒あたりの発生数(個 / 秒)
   // particleSystem.startX = 1200,
-  if (600 < count && count < 1000) {
-    particleSystem.startX -= 20;
-  }
   // particleSystem.startXVariance = "0",        // 発生位置 - X座標のばらつき(px)
   // particleSystem.startY = 60,
   if (600 < count && count < 1000) {
-    particleSystem.startY += 20;
+    particleSystem.startX += 45;
+    particleSystem.startY += 15;
   }
+
+
   // particleSystem.startYVariance = "0",        // 発生位置 - Y座標のばらつき(px)
   // particleSystem.initialDirection = 315,      // 初期速度 - 方向(度)
   // particleSystem.initialDirectionVariance = 360, // 初期速度 - 方向のばらつき(度)
