@@ -199,14 +199,14 @@ function algorithm5() {
     else if (gameRecord2D.length === 3) {
         p_start();      // STEP.      stage起動
         // p_bubble();
-        // p_circle(x, y, "w");
+        p_circle(x, y, "w");
         // p_fireBall(x, y, "w");
         // p_commetL(x, y, "w");
         // p_fireWall(x, y, "w");
 
 
         // document.querySelector("#myCanvas").style.backgroundImage = "url(/images/banpei_uk3.png)";
-        p_fireWall(x, y, "w");
+        // p_fireWall(x, y, "w");
 
 
     } else if (gameRecord2D.length === 5) {

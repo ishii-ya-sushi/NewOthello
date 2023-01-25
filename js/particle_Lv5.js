@@ -99,6 +99,7 @@ const circle = {
     "width": 1280,
     "height": 720,
     "emitFrequency": "200",
+    // "startX": 640.0,
     "startX": 640.0,
     "startXVariance": 0,
     "startY": 360.0,
