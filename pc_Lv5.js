@@ -205,7 +205,7 @@ function algorithm5() {
         // p_fireWall(x, y, "w");
 
 
-        document.querySelector("#myCanvas").style.backgroundImage = "url(/images/banpei_uk3.png)";
+        // document.querySelector("#myCanvas").style.backgroundImage = "url(/images/banpei_uk3.png)";
         p_fireWall(x, y, "w");
 
 
