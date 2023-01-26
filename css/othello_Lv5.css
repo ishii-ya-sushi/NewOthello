@@ -56,22 +56,26 @@ div#canvas {
     background-color: rgb(1, 34, 1);
     /* background-color: darkgreen; */
 
-    width: 600px;
-    height: 600px;
+    /* width: 600px;
+    height: 600px; */
+
+    height: 500px;
+    width: 500px;
+
 
     /* border-radius: 20%; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 
-    opacity: 0.9;
+    opacity: 0.92;
 }
 
 .square {
-    /* width: 45px; */
-    /* height: 45px;     */
-    width: 8%;
-    height: 8%;
+    width: 48px;
+    height: 48px;    
+    /* width: 8%;
+    height: 8%; */
 
     /* background-color: rgb(80, 149, 80); */
     background-color: darkgreen;
@@ -123,9 +127,53 @@ div#canvas {
     opacity: 0.01;
 }
 
+#squares0,
+#squares1,
+#squares2,
+#squares3,
+#squares4,
+#squares5,
+#squares6,
+#squares7,
+#squares8,
+#squares9,
+#squares90,
+#squares91,
+#squares92,
+#squares93,
+#squares94,
+#squares95,
+#squares96,
+#squares97,
+#squares98,
+#squares99 {
 
+    height: 0px;
+    /* width: 10px; */
+}
 
-
+#squares0,
+#squares9,
+#squares10,
+#squares19,
+#squares20,
+#squares29,
+#squares30,
+#squares39,
+#squares40,
+#squares49,
+#squares50,
+#squares59,
+#squares60,
+#squares69,
+#squares70,
+#squares79,
+#squares80,
+#squares89,
+#squares90,
+#squares99 {
+    width: 0px;
+}
 
 
 
